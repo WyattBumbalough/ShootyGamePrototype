@@ -62,7 +62,7 @@ size = Vector3(5, 10, 5)
 material = SubResource("StandardMaterial3D_mc158")
 
 [node name="Label3D" type="Label3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.5553913, 5.6533103)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.8200309, 5.6533103)
 billboard = 1
 text = "Ur gay lmao"
 font_size = 128
