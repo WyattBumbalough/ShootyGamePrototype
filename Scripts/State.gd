@@ -6,7 +6,7 @@ var Char: Player
 #--Varibles End--
 
 #--Exports--
-@export_category("States")
+#@export_category("States")
 @export var idle_state: State
 @export var jump_state: State
 @export var falling_state: State

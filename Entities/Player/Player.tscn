@@ -1,8 +1,11 @@
-[gd_scene load_steps=6 format=3 uid="uid://dxpf6y10dmc1q"]
+[gd_scene load_steps=9 format=3 uid="uid://dxpf6y10dmc1q"]
 
-[ext_resource type="Script" uid="uid://cs730ueljjghv" path="res://Entities/Player/Player.gd" id="1_xhfnw"]
-[ext_resource type="Script" uid="uid://cmek1dcaubhxl" path="res://Entities/Player/State_Machine.gd" id="2_ww0jn"]
-[ext_resource type="Script" uid="uid://b51yfegyf271a" path="res://Entities/Player/Idle.gd" id="3_vweq0"]
+[ext_resource type="Script" uid="uid://cs730ueljjghv" path="res://Scripts/State Machine/Player.gd" id="1_xhfnw"]
+[ext_resource type="Script" uid="uid://cmek1dcaubhxl" path="res://Scripts/State Machine/State_Machine.gd" id="2_ww0jn"]
+[ext_resource type="Script" uid="uid://b51yfegyf271a" path="res://Scripts/State Machine/Idle.gd" id="3_vweq0"]
+[ext_resource type="Script" uid="uid://dafeehxt4nr28" path="res://Scripts/State Machine/Moving.gd" id="4_1des2"]
+[ext_resource type="Script" uid="uid://y0he0fi2dn52" path="res://Entities/Player/Falling.gd" id="5_an6q6"]
+[ext_resource type="Script" uid="uid://c5lf3ml8immra" path="res://Entities/Player/Jump.gd" id="6_t38ms"]
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_kpjcp"]
 
@@ -15,17 +18,22 @@ script = ExtResource("1_xhfnw")
 unique_name_in_owner = true
 script = ExtResource("2_ww0jn")
 
-[node name="Idle" type="Node" parent="PlayerStateMachine"]
+[node name="Idle" type="Node" parent="PlayerStateMachine" node_paths=PackedStringArray("idle_state", "moving_state")]
 script = ExtResource("3_vweq0")
-move_speed = null
-accel = null
-friction = null
+idle_state = NodePath(".")
+moving_state = NodePath("../Moving")
+metadata/_custom_type_script = "uid://wp5qe084fq8l"
 
-[node name="Moving" type="Node" parent="PlayerStateMachine"]
+[node name="Moving" type="Node" parent="PlayerStateMachine" node_paths=PackedStringArray("idle_state", "moving_state")]
+script = ExtResource("4_1des2")
+idle_state = NodePath("../Idle")
+moving_state = NodePath(".")
 
 [node name="Falling" type="Node" parent="PlayerStateMachine"]
+script = ExtResource("5_an6q6")
 
 [node name="Jump" type="Node" parent="PlayerStateMachine"]
+script = ExtResource("6_t38ms")
 
 [node name="Head" type="Node3D" parent="."]
 

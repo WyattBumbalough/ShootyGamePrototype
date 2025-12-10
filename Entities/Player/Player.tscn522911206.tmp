@@ -1,0 +1,39 @@
+[gd_scene load_steps=6 format=3 uid="uid://dxpf6y10dmc1q"]
+
+[ext_resource type="Script" uid="uid://cs730ueljjghv" path="res://Entities/Player/Player.gd" id="1_xhfnw"]
+[ext_resource type="Script" uid="uid://cmek1dcaubhxl" path="res://Entities/Player/State_Machine.gd" id="2_ww0jn"]
+[ext_resource type="Script" uid="uid://b51yfegyf271a" path="res://Entities/Player/Idle.gd" id="3_vweq0"]
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_kpjcp"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_kne1u"]
+
+[node name="Player" type="CharacterBody3D"]
+script = ExtResource("1_xhfnw")
+
+[node name="PlayerStateMachine" type="Node" parent="."]
+unique_name_in_owner = true
+script = ExtResource("2_ww0jn")
+
+[node name="Idle" type="Node" parent="PlayerStateMachine"]
+script = ExtResource("3_vweq0")
+metadata/_custom_type_script = "uid://wp5qe084fq8l"
+
+[node name="Moving" type="Node" parent="PlayerStateMachine"]
+
+[node name="Falling" type="Node" parent="PlayerStateMachine"]
+
+[node name="Jump" type="Node" parent="PlayerStateMachine"]
+
+[node name="Head" type="Node3D" parent="."]
+
+[node name="Eyes" type="Camera3D" parent="Head"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5541277, 0)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+mesh = SubResource("CapsuleMesh_kpjcp")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+shape = SubResource("CapsuleShape3D_kne1u")

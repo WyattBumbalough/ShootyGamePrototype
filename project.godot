@@ -16,7 +16,7 @@ config/icon="res://Assets/icon.svg"
 
 [autoload]
 
-PlayerandStatemachineref="*res://Scripts/Global.gd"
+Global="*res://Scripts/Global.gd"
 
 [file_customization]
 

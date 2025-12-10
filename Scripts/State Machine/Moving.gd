@@ -2,12 +2,12 @@ extends State
 
 func handle_physics(delta) -> State:
 		Char.handle_movement(move_speed, accel, friction)
-	# Fall is not accelerating upward
+	
 		if Char.velocity.y <= 0 and !Char.is_on_floor():
 			return falling_state
-		return
+		return null
 
 func handle_input(event: InputEvent) -> State:
-	if Input.get_vector("left", "right", "up", "down"):
-		return walk_state
-	return null
+		if Input.get_vector("left", "right", "up", "down") == Vector2.ZERO:
+			return idle_state
+		return null
