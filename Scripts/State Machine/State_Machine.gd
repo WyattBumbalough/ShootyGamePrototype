@@ -27,7 +27,7 @@ func change_state(new_state: State):
 		current_state.enter(previous_state)
 
 func handle_physics(delta):
-		var new_state = current_state.handle.physics(delta)
+		var new_state = current_state.handle_physics(delta)
 		if new_state != null:
 			change_state(new_state)
 

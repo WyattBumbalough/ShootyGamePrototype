@@ -5,7 +5,7 @@ extends State
 #--Export End--
 
 func enter(previous_state: State):
-		Char.velocity.y += jump_force
+		Char.velocity.y = jump_force
 		move_speed = previous_state.move_speed
 
 func handle_physics(delta) -> State:

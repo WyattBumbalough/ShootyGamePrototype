@@ -17,6 +17,7 @@ var can_move: bool = true
 
 func _ready() -> void:
 		Global.CurrentPlayer = self
+		Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 		player_state_machine.initialize(self)
 
 func _unhandled_input(event: InputEvent) -> void:
@@ -26,9 +27,11 @@ func _unhandled_input(event: InputEvent) -> void:
 			head.rotate_y(-event.relative.x * mouse_sens)
 			eyes.rotate_x(-event.relative.y * mouse_sens)
 			
-		eyes.rotation.x = clamp(eyes.roation.x, deg_to_rad(-90), deg_to_rad(90))
+		eyes.rotation.x = clamp(eyes.rotation.x, deg_to_rad(-90), deg_to_rad(90))
 
 func _physics_process(delta: float) -> void:
+	#Display the current state.
+		$CurrentState.text = player_state_machine.current_state.name
 		player_state_machine.handle_physics(delta)
 	# Gravity
 		if not is_on_floor():
@@ -40,7 +43,7 @@ func handle_movement(speed: float, accel: float, friction: float):
 		var input_dir := Input.get_vector("left", "right", "up", "down")
 		var direction := (head.transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
 	# Lock player movement on can_move = false
-		if can_move != false:
+		if can_move == true:
 			
 			if is_on_floor():
 			# Ground Movement
@@ -50,7 +53,7 @@ func handle_movement(speed: float, accel: float, friction: float):
 				# Slow player while on ground
 				else:
 					velocity.x = lerp(velocity.x, 0.0, friction)
-					velocity.x = lerp(velocity.x, 0, friction)
+					velocity.z = lerp(velocity.z, 0.0, friction)
 			# Air movement
 			else: 
 				if direction:

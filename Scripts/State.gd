@@ -12,9 +12,9 @@ var Char: Player
 @export var falling_state: State
 @export var moving_state: State
 @export_category("Movement Tweaking") #Exports movement variables
-@export var move_speed: float
-@export var accel: float
-@export var friction: float
+@export var move_speed: float = 7
+@export var accel: float = 0.05
+@export var friction: float = 0.1
 #--Exports End--
 
 func enter(previous_state: State):

@@ -8,6 +8,8 @@ func handle_physics(delta) -> State:
 		return
 
 func handle_input(event: InputEvent) -> State:
-	if Input.get_vector("left", "right", "up", "down"):
-		return moving_state
-	return null
+		if Input.is_action_just_pressed("jump"):
+			return jump_state
+		if Input.get_vector("left", "right", "up", "down"):
+			return moving_state
+		return null

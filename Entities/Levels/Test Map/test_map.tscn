@@ -1,4 +1,6 @@
-[gd_scene load_steps=6 format=3 uid="uid://dr270p12kgbng"]
+[gd_scene load_steps=7 format=3 uid="uid://dr270p12kgbng"]
+
+[ext_resource type="PackedScene" uid="uid://dxpf6y10dmc1q" path="res://Entities/Player/Player.tscn" id="1_mc158"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_qmye1"]
 sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
@@ -66,3 +68,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.8200309, 5.6533103)
 billboard = 1
 text = "Ur gay lmao"
 font_size = 128
+
+[node name="Player" parent="." instance=ExtResource("1_mc158")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.6542964, 0.6413083, 0)
