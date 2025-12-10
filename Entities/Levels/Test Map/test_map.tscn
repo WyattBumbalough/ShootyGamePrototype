@@ -1,0 +1,13 @@
+[gd_scene load_steps=2 format=3 uid="uid://dr270p12kgbng"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_qmye1"]
+albedo_color = Color(0.40909362, 0.40909362, 0.40909362, 1)
+
+[node name="TestMap" type="Node3D"]
+
+[node name="Level" type="Node3D" parent="."]
+
+[node name="Floor" type="CSGBox3D" parent="Level"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.75, 0)
+size = Vector3(50, 1, 50)
+material = SubResource("StandardMaterial3D_qmye1")
