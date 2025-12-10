@@ -14,6 +14,10 @@ config/name="ShootyGame Prototype"
 config/features=PackedStringArray("4.5", "Forward Plus")
 config/icon="res://Assets/icon.svg"
 
+[autoload]
+
+PlayerandStatemachineref="*res://Scripts/Global.gd"
+
 [file_customization]
 
 folder_colors={

@@ -1,0 +1,30 @@
+extends Node
+class_name State
+
+#--Variables--
+var Char: Player
+#--Varibles End--
+
+#--Exports--
+@export_category("States")
+@export var idle_state: State
+@export var jump_state: State
+@export var falling_state: State
+@export var moving_state: State
+@export_category("Movement Tweaking") #Exports movement variables
+@export var move_speed: float
+@export var accel: float
+@export var friction: float
+#--Exports End--
+
+func enter(previous_state: State):
+		pass
+
+func exit():
+		pass
+		
+func handle_physics(delta) -> State:
+		return null
+
+func handle_input(event: InputEvent) -> State:
+	return null
