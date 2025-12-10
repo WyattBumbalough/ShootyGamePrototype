@@ -41,6 +41,11 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -16, 4.75, -16)
 size = Vector3(5, 10, 5)
 material = SubResource("StandardMaterial3D_mc158")
 
+[node name="CSGBox3D5" type="CSGBox3D" parent="Level"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.20866013, 4.75, 0.74552155)
+size = Vector3(5, 10, 5)
+material = SubResource("StandardMaterial3D_mc158")
+
 [node name="CSGBox3D2" type="CSGBox3D" parent="Level"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -16, 4.75, 16)
 size = Vector3(5, 10, 5)
