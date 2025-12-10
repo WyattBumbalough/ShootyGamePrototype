@@ -17,14 +17,14 @@ var Char: Player
 @export var friction: float = 0.1
 #--Exports End--
 
-func enter(previous_state: State):
+func enter(_previous_state: State):
 		pass
 
 func exit():
 		pass
 		
-func handle_physics(delta) -> State:
+func handle_physics(_delta) -> State:
 		return null
 
-func handle_input(event: InputEvent) -> State:
+func handle_input(_event: InputEvent) -> State:
 	return null

@@ -4,11 +4,11 @@ extends State
 @export var jump_force: float
 #--Export End--
 
-func enter(previous_state: State):
+func enter(_previous_state: State):
 		Char.velocity.y = jump_force
-		move_speed = previous_state.move_speed
+		move_speed = _previous_state.move_speed
 
-func handle_physics(delta) -> State:
+func handle_physics(_delta) -> State:
 		Char.handle_movement(move_speed, accel, friction)
 		
 		if Char.velocity.y <= 0: # Is the player accelerating upwards?

@@ -19,6 +19,9 @@ func _ready() -> void:
 		Global.CurrentPlayer = self
 		Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 		player_state_machine.initialize(self)
+		
+		head.rotation.y = rotation.y
+		rotation.y = 0
 
 func _unhandled_input(event: InputEvent) -> void:
 		player_state_machine.handle_input(event)

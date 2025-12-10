@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://dxpf6y10dmc1q"]
+[gd_scene load_steps=12 format=3 uid="uid://dxpf6y10dmc1q"]
 
 [ext_resource type="Script" uid="uid://cs730ueljjghv" path="res://Scripts/State Machine/Player.gd" id="1_xhfnw"]
 [ext_resource type="Script" uid="uid://cmek1dcaubhxl" path="res://Scripts/State Machine/State_Machine.gd" id="2_ww0jn"]
@@ -7,7 +7,18 @@
 [ext_resource type="Script" uid="uid://y0he0fi2dn52" path="res://Entities/Player/Falling.gd" id="5_an6q6"]
 [ext_resource type="Script" uid="uid://c5lf3ml8immra" path="res://Entities/Player/Jump.gd" id="6_t38ms"]
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_t38ms"]
+albedo_color = Color(1, 0.47058824, 0.20784314, 1)
+
+[sub_resource type="PrismMesh" id="PrismMesh_hj1c0"]
+material = SubResource("StandardMaterial3D_t38ms")
+size = Vector3(0.435, 0.25, 0.085)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_x44r4"]
+albedo_color = Color(0.45, 0.52333325, 1, 1)
+
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_kpjcp"]
+material = SubResource("StandardMaterial3D_x44r4")
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_kne1u"]
 
@@ -52,9 +63,16 @@ falling_state = NodePath("../Falling")
 moving_state = NodePath("../Moving")
 
 [node name="Head" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
 
 [node name="Eyes" type="Camera3D" parent="Head"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5541277, 0)
+cull_mask = 524287
+
+[node name="Schnoz" type="MeshInstance3D" parent="Head"]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, -0.40500748, -0.5736566)
+layers = 524288
+mesh = SubResource("PrismMesh_hj1c0")
+skeleton = NodePath("../..")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)

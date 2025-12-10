@@ -1,7 +1,7 @@
 extends State
 
 
-func handle_physics(delta) -> State:
+func handle_physics(_delta) -> State:
 		Char.handle_movement(move_speed, accel, friction)
 	
 		if Char.velocity.y <= 0: #Is the character accelerating upwards?
