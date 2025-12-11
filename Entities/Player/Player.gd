@@ -42,23 +42,23 @@ func _physics_process(delta: float) -> void:
 		move_and_slide()
 
 func handle_movement(speed: float, accel: float, friction: float):
-	# Get the input direction and handle the movement/deceleration.
-		var input_dir := Input.get_vector("left", "right", "up", "down")
-		var direction := (head.transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
-	# Lock player movement on can_move = false
-		if can_move == true:
-			
-			if is_on_floor():
-			# Ground Movement
-				if direction:
-					velocity.x = lerp(velocity.x, direction.x * speed, accel)
-					velocity.z = lerp(velocity.z, direction.z * speed, accel)
-				# Slow player while on ground
-				else:
-					velocity.x = lerp(velocity.x, 0.0, friction)
-					velocity.z = lerp(velocity.z, 0.0, friction)
-			# Air movement
-			else: 
-				if direction:
-					velocity.x = lerp(velocity.x, direction.x * speed, accel)
-					velocity.z = lerp(velocity.z, direction.z * speed, accel)
+	if can_move == false:
+		return
+# Get the input direction and handle the movement/deceleration.
+	var input_dir := Input.get_vector("left", "right", "up", "down")
+	var direction := (head.transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
+# Lock player movement on can_move = false
+	if is_on_floor():
+	# Ground Movement
+		if direction:
+			velocity.x = lerp(velocity.x, direction.x * speed, accel)
+			velocity.z = lerp(velocity.z, direction.z * speed, accel)
+		# Slow player while on ground
+		else:
+			velocity.x = lerp(velocity.x, 0.0, friction)
+			velocity.z = lerp(velocity.z, 0.0, friction)
+	# Air movement
+	else: 
+		if direction:
+			velocity.x = lerp(velocity.x, direction.x * speed, accel)
+			velocity.z = lerp(velocity.z, direction.z * speed, accel)
