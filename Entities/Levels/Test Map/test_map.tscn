@@ -1,7 +1,9 @@
-[gd_scene load_steps=9 format=3 uid="uid://dr270p12kgbng"]
+[gd_scene load_steps=11 format=3 uid="uid://dr270p12kgbng"]
 
 [ext_resource type="PackedScene" uid="uid://dxpf6y10dmc1q" path="res://Entities/Player/Player.tscn" id="1_mc158"]
-[ext_resource type="PackedScene" uid="uid://b58n3ea82dc54" path="res://Entities/Enemies/enemy.tscn" id="2_07bv8"]
+[ext_resource type="PackedScene" uid="uid://b58n3ea82dc54" path="res://Entities/Enemies/enemy_small.tscn" id="2_07bv8"]
+[ext_resource type="Script" uid="uid://b2rpjycxux238" path="res://Common/Spawning System/wave_manager.gd" id="2_mrbiv"]
+[ext_resource type="PackedScene" uid="uid://iwtqaue6ffcv" path="res://Common/Spawning System/Spawner/spawner.tscn" id="3_aebi7"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_qmye1"]
 sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
@@ -58,28 +60,50 @@ material = SubResource("StandardMaterial3D_qmye1")
 
 [node name="CSGBox3D" type="CSGBox3D" parent="NavigationRegion3D/Level"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -16, 4.75, -16)
+use_collision = true
 size = Vector3(5, 10, 5)
 material = SubResource("StandardMaterial3D_mc158")
 
 [node name="CSGBox3D5" type="CSGBox3D" parent="NavigationRegion3D/Level"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.20866013, 4.75, 0.74552155)
+use_collision = true
 size = Vector3(5, 10, 5)
 material = SubResource("StandardMaterial3D_mc158")
 
 [node name="CSGBox3D2" type="CSGBox3D" parent="NavigationRegion3D/Level"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -16, 4.75, 16)
+use_collision = true
 size = Vector3(5, 10, 5)
 material = SubResource("StandardMaterial3D_mc158")
 
 [node name="CSGBox3D3" type="CSGBox3D" parent="NavigationRegion3D/Level"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 16, 4.75, -16)
+use_collision = true
 size = Vector3(5, 10, 5)
 material = SubResource("StandardMaterial3D_mc158")
 
 [node name="CSGBox3D4" type="CSGBox3D" parent="NavigationRegion3D/Level"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 16, 4.75, 16)
+use_collision = true
 size = Vector3(5, 10, 5)
 material = SubResource("StandardMaterial3D_mc158")
 
-[node name="Enemy" parent="." instance=ExtResource("2_07bv8")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 23.492607, -0.25000012, -7.01503)
+[node name="WaveManager" type="Node" parent="."]
+script = ExtResource("2_mrbiv")
+test_spawn = ExtResource("2_07bv8")
+
+[node name="Spawner" parent="WaveManager" instance=ExtResource("3_aebi7")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 19.25, 0, 0)
+scene = ExtResource("2_07bv8")
+
+[node name="Spawner2" parent="WaveManager" instance=ExtResource("3_aebi7")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 23.897095, 0, 5.75)
+scene = ExtResource("2_07bv8")
+
+[node name="Spawner3" parent="WaveManager" instance=ExtResource("3_aebi7")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 26.831108, 0, -14.456287)
+scene = ExtResource("2_07bv8")
+
+[node name="Spawner4" parent="WaveManager" instance=ExtResource("3_aebi7")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14.831108, 0, -6.7062874)
+scene = ExtResource("2_07bv8")

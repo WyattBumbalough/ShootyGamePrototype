@@ -1,0 +1,52 @@
+[gd_scene load_steps=8 format=3 uid="uid://d3slh1ctv0m0q"]
+
+[ext_resource type="Script" uid="uid://b5aers873e8rj" path="res://Entities/Enemies/enemy.gd" id="1_hjb3o"]
+[ext_resource type="Script" uid="uid://c0lh3xudunkd8" path="res://Common/Components/health_component.gd" id="2_7khqr"]
+[ext_resource type="Script" uid="uid://bnh6tgipmolts" path="res://Common/Components/hitbox_component.gd" id="3_4e1e7"]
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_i1i5g"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_hjb3o"]
+albedo_color = Color(1, 0.6784314, 0.15686275, 1)
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_7khqr"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_h3ult"]
+radius = 0.6
+
+[node name="EnemyMedium" type="CharacterBody3D" node_paths=PackedStringArray("health_component", "hitbox_component", "animations", "nav_agent")]
+script = ExtResource("1_hjb3o")
+move_speed = 3.5
+type = 1
+health_component = NodePath("HealthComponent")
+hitbox_component = NodePath("HitboxComponent")
+animations = NodePath("AnimationPlayer")
+nav_agent = NodePath("NavigationAgent3D")
+metadata/_custom_type_script = "uid://b5aers873e8rj"
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+mesh = SubResource("CapsuleMesh_i1i5g")
+surface_material_override/0 = SubResource("StandardMaterial3D_hjb3o")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+shape = SubResource("CapsuleShape3D_7khqr")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+
+[node name="NavigationAgent3D" type="NavigationAgent3D" parent="."]
+
+[node name="HealthComponent" type="Node" parent="."]
+script = ExtResource("2_7khqr")
+metadata/_custom_type_script = "uid://c0lh3xudunkd8"
+
+[node name="HitboxComponent" type="Area3D" parent="." node_paths=PackedStringArray("health_component")]
+script = ExtResource("3_4e1e7")
+health_component = NodePath("../HealthComponent")
+metadata/_custom_type_script = "uid://bnh6tgipmolts"
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="HitboxComponent"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+shape = SubResource("CapsuleShape3D_h3ult")
+debug_color = Color(0.9647059, 0, 0.26666668, 1)

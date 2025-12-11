@@ -1,0 +1,58 @@
+[gd_scene load_steps=9 format=3 uid="uid://iwtqaue6ffcv"]
+
+[ext_resource type="Script" uid="uid://wtgm6cxit5au" path="res://Common/Spawning System/Spawner/spawner.gd" id="1_wm07m"]
+[ext_resource type="AudioStream" uid="uid://dhumdbu37tgc3" path="res://Assets/SFX/pop.mp3" id="2_mkfnp"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_wm07m"]
+shading_mode = 0
+albedo_color = Color(1, 0, 0, 1)
+
+[sub_resource type="TorusMesh" id="TorusMesh_mkfnp"]
+material = SubResource("StandardMaterial3D_wm07m")
+outer_radius = 0.571
+rings = 12
+ring_segments = 24
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_wwfno"]
+shading_mode = 0
+albedo_color = Color(1.4824272e-05, 0.87338835, 0.19331977, 1)
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_qpmpb"]
+material = SubResource("StandardMaterial3D_wwfno")
+radius = 0.116
+radial_segments = 6
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_llpiy"]
+shading_mode = 0
+albedo_color = Color(1.4824272e-05, 0.87338835, 0.19331977, 1)
+
+[sub_resource type="PrismMesh" id="PrismMesh_hsqq4"]
+material = SubResource("StandardMaterial3D_llpiy")
+size = Vector3(0.865, 0.5, 0.28)
+
+[node name="Spawner" type="Node3D"]
+script = ExtResource("1_wm07m")
+
+[node name="Mesh" type="Node3D" parent="."]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Mesh"]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0)
+cast_shadow = 0
+mesh = SubResource("TorusMesh_mkfnp")
+skeleton = NodePath("../..")
+
+[node name="arrow" type="MeshInstance3D" parent="Mesh"]
+transform = Transform3D(-0.48008904, 0, 0.87721974, 0, 1, 0, -0.87721974, 0, -0.48008904, 0, 1.626854, 0)
+cast_shadow = 0
+mesh = SubResource("CapsuleMesh_qpmpb")
+skeleton = NodePath("../..")
+
+[node name="MeshInstance3D3" type="MeshInstance3D" parent="Mesh/arrow"]
+transform = Transform3D(1, 0, 0, 0, -1, 8.742278e-08, 0, -8.742278e-08, -1, 0, -1, 0)
+cast_shadow = 0
+mesh = SubResource("PrismMesh_hsqq4")
+skeleton = NodePath("../../..")
+
+[node name="Pop" type="AudioStreamPlayer3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.8623278, 0)
+stream = ExtResource("2_mkfnp")

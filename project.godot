@@ -13,12 +13,12 @@ config_version=5
 config/name="ShootyGame Prototype"
 run/main_scene="uid://dr270p12kgbng"
 config/features=PackedStringArray("4.5", "Forward Plus")
-config/icon="res://Assets/icon.svg"
+config/icon="res://Assets/Icons/icon.svg"
 
 [autoload]
 
-Global="*res://Common/Globals/Global.gd"
-Refs="*res://Common/Globals/Refs.tscn"
+Global="*res://Common/Autoloads/Global.gd"
+Refs="*res://Common/Autoloads/Refs/Refs.tscn"
 
 [file_customization]
 
