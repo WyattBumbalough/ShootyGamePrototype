@@ -18,6 +18,7 @@ config/icon="res://Assets/icon.svg"
 [autoload]
 
 Global="*res://Common/Globals/Global.gd"
+WeaponManager="*res://Common/Weapon Manager/WeaponManager.gd"
 
 [file_customization]
 
