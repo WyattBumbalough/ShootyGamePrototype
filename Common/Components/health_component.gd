@@ -1,3 +1,4 @@
+@icon("res://Assets/Icons/heart.png")
 extends Node
 class_name HealthComponent
 

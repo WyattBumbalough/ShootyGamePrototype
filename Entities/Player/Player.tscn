@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://dxpf6y10dmc1q"]
+[gd_scene load_steps=15 format=3 uid="uid://dxpf6y10dmc1q"]
 
 [ext_resource type="Script" uid="uid://cs730ueljjghv" path="res://Entities/Player/Player.gd" id="1_xhfnw"]
 [ext_resource type="Script" uid="uid://cmek1dcaubhxl" path="res://Common/State Machine/State_Machine.gd" id="2_ww0jn"]
@@ -6,6 +6,7 @@
 [ext_resource type="Script" uid="uid://dafeehxt4nr28" path="res://Entities/Player/States/Moving.gd" id="4_1des2"]
 [ext_resource type="Script" uid="uid://y0he0fi2dn52" path="res://Entities/Player/States/Falling.gd" id="5_an6q6"]
 [ext_resource type="Script" uid="uid://c5lf3ml8immra" path="res://Entities/Player/States/Jump.gd" id="6_t38ms"]
+[ext_resource type="Texture2D" uid="uid://cb4ydn7v8canl" path="res://Assets/Textures/crosshair001.png" id="7_hj1c0"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_t38ms"]
 albedo_color = Color(1, 0.47058824, 0.20784314, 1)
@@ -21,6 +22,16 @@ albedo_color = Color(0.45, 0.52333325, 1, 1)
 material = SubResource("StandardMaterial3D_x44r4")
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_kne1u"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_hj1c0"]
+content_margin_left = 20.0
+content_margin_top = 20.0
+
+[sub_resource type="LabelSettings" id="LabelSettings_x44r4"]
+font_size = 24
+outline_size = 1
+outline_color = Color(0, 0, 0, 1)
+shadow_color = Color(0, 0, 0, 0.49803922)
 
 [node name="Player" type="CharacterBody3D"]
 script = ExtResource("1_xhfnw")
@@ -68,6 +79,14 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
 [node name="Eyes" type="Camera3D" parent="Head"]
 cull_mask = 524287
 
+[node name="TestRaycast" type="RayCast3D" parent="Head/Eyes"]
+enabled = false
+target_position = Vector3(0, 0, -500)
+collision_mask = 2
+hit_from_inside = true
+collide_with_areas = true
+collide_with_bodies = false
+
 [node name="Schnoz" type="MeshInstance3D" parent="Head"]
 transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, -0.40500748, -0.5736566)
 layers = 524288
@@ -85,3 +104,35 @@ shape = SubResource("CapsuleShape3D_kne1u")
 [node name="CurrentState" type="Label" parent="."]
 offset_right = 40.0
 offset_bottom = 23.0
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="CenterContainer" type="CenterContainer" parent="CanvasLayer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="Reticle" type="TextureRect" parent="CanvasLayer/CenterContainer"]
+layout_mode = 2
+texture = ExtResource("7_hj1c0")
+
+[node name="Control" type="Control" parent="CanvasLayer"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="EnemyCountLabel" type="Label" parent="CanvasLayer/Control"]
+unique_name_in_owner = true
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 23.0
+theme_override_styles/normal = SubResource("StyleBoxEmpty_hj1c0")
+text = "Enemies remaining: "
+label_settings = SubResource("LabelSettings_x44r4")

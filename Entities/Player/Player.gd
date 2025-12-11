@@ -5,6 +5,7 @@ class_name Player
 @onready var player_state_machine: StateMachine = %PlayerStateMachine
 @onready var head: Node3D = $Head
 @onready var eyes: Camera3D = $Head/Eyes
+@onready var enemy_count_label: Label = %EnemyCountLabel
 
 
 #--References End--
@@ -23,23 +24,33 @@ func _ready() -> void:
 		head.rotation.y = rotation.y
 		rotation.y = 0
 
+
 func _unhandled_input(event: InputEvent) -> void:
-		player_state_machine.handle_input(event)
+	player_state_machine.handle_input(event)
+	
+	if event is InputEventMouseMotion and lock_mouse != true:
+		head.rotate_y(-event.relative.x * mouse_sens)
+		eyes.rotate_x(-event.relative.y * mouse_sens)
 		
-		if event is InputEventMouseMotion and lock_mouse != true:
-			head.rotate_y(-event.relative.x * mouse_sens)
-			eyes.rotate_x(-event.relative.y * mouse_sens)
-			
-		eyes.rotation.x = clamp(eyes.rotation.x, deg_to_rad(-90), deg_to_rad(90))
+	eyes.rotation.x = clamp(eyes.rotation.x, deg_to_rad(-90), deg_to_rad(90))
+	
+	if Input.is_action_just_pressed("shoot"):
+		raycast()
+
+
+func _process(_delta: float) -> void:
+	enemy_count_label.text = "Enemies remaining: " + str(Refs.wave_manager.current_enemies)
+
 
 func _physics_process(delta: float) -> void:
 	#Display the current state.
-		$CurrentState.text = player_state_machine.current_state.name
-		player_state_machine.handle_physics(delta)
+	$CurrentState.text = player_state_machine.current_state.name
+	player_state_machine.handle_physics(delta)
 	# Gravity
-		if not is_on_floor():
-			velocity += get_gravity() * delta
-		move_and_slide()
+	if not is_on_floor():
+		velocity += get_gravity() * delta
+	move_and_slide()
+
 
 func handle_movement(speed: float, accel: float, friction: float):
 	if can_move == false:
@@ -62,3 +73,15 @@ func handle_movement(speed: float, accel: float, friction: float):
 		if direction:
 			velocity.x = lerp(velocity.x, direction.x * speed, accel)
 			velocity.z = lerp(velocity.z, direction.z * speed, accel)
+
+
+func raycast():
+	# Raycast should only run when this function is called, so that it isn't constantly
+	# calculating collisions.
+	var ray: RayCast3D = $Head/Eyes/TestRaycast
+	ray.force_raycast_update()
+	if ray.is_colliding():
+		var collider = ray.get_collider()
+		#print(collider)
+		if collider is HitboxComponent:
+			collider.take_damage(50)

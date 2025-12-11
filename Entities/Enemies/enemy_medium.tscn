@@ -42,6 +42,7 @@ script = ExtResource("2_7khqr")
 metadata/_custom_type_script = "uid://c0lh3xudunkd8"
 
 [node name="HitboxComponent" type="Area3D" parent="." node_paths=PackedStringArray("health_component")]
+collision_layer = 2
 script = ExtResource("3_4e1e7")
 health_component = NodePath("../HealthComponent")
 metadata/_custom_type_script = "uid://bnh6tgipmolts"

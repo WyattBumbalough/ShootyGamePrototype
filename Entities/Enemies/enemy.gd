@@ -17,7 +17,7 @@ func _ready():
 	setup.call_deferred()
 	
 	# Delete when health reaches zero
-	health_component.health_reached_zero.connect(queue_free)
+	health_component.health_reached_zero.connect(die)
 
 
 func setup():
@@ -40,3 +40,8 @@ func _physics_process(_delta: float) -> void:
 
 func set_target_location(new_position: Vector3):
 	nav_agent.target_position = new_position
+
+
+func die():
+	GameManager.enemy_killed.emit()
+	queue_free()

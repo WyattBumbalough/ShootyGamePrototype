@@ -14,7 +14,7 @@ func _ready() -> void:
 	
 	#spawn_entity(scene)
 
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	if Engine.is_editor_hint():
 		$Mesh.visible = true
 		$Mesh/arrow.rotation.y += 0.01
@@ -25,3 +25,5 @@ func spawn_entity(_scene: PackedScene):
 	
 	pop.pitch_scale = randf_range(0.85, 1.15)
 	pop.play()
+	
+	GameManager.enemy_spawned.emit()
