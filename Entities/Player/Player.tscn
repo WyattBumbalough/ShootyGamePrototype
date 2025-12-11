@@ -1,11 +1,11 @@
 [gd_scene load_steps=12 format=3 uid="uid://dxpf6y10dmc1q"]
 
-[ext_resource type="Script" uid="uid://cs730ueljjghv" path="res://Scripts/State Machine/Player.gd" id="1_xhfnw"]
-[ext_resource type="Script" uid="uid://cmek1dcaubhxl" path="res://Scripts/State Machine/State_Machine.gd" id="2_ww0jn"]
-[ext_resource type="Script" uid="uid://b51yfegyf271a" path="res://Scripts/State Machine/Idle.gd" id="3_vweq0"]
-[ext_resource type="Script" uid="uid://dafeehxt4nr28" path="res://Scripts/State Machine/Moving.gd" id="4_1des2"]
-[ext_resource type="Script" uid="uid://y0he0fi2dn52" path="res://Entities/Player/Falling.gd" id="5_an6q6"]
-[ext_resource type="Script" uid="uid://c5lf3ml8immra" path="res://Entities/Player/Jump.gd" id="6_t38ms"]
+[ext_resource type="Script" uid="uid://cs730ueljjghv" path="res://Entities/Player/Player.gd" id="1_xhfnw"]
+[ext_resource type="Script" uid="uid://cmek1dcaubhxl" path="res://Common/State Machine/State_Machine.gd" id="2_ww0jn"]
+[ext_resource type="Script" uid="uid://b51yfegyf271a" path="res://Entities/Player/States/Idle.gd" id="3_vweq0"]
+[ext_resource type="Script" uid="uid://dafeehxt4nr28" path="res://Entities/Player/States/Moving.gd" id="4_1des2"]
+[ext_resource type="Script" uid="uid://y0he0fi2dn52" path="res://Entities/Player/States/Falling.gd" id="5_an6q6"]
+[ext_resource type="Script" uid="uid://c5lf3ml8immra" path="res://Entities/Player/States/Jump.gd" id="6_t38ms"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_t38ms"]
 albedo_color = Color(1, 0.47058824, 0.20784314, 1)
