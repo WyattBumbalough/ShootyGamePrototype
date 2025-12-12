@@ -7,37 +7,43 @@ class_name WaveManager
 
 @onready var rand = RandomNumberGenerator.new()
 @onready var dead_enemies: int = 0
+
 var current_enemies: int = 0
+var wave_dict: Dictionary = {
+	"Light" : 0,
+	"Medium" : 0,
+	"Heavy" : 0
+}
 
 func _ready() -> void:
-	Refs.wave_manager = self
+	Global.wave_manager = self
 	GameManager.enemy_killed.connect(_on_enemy_killed)
 
-#func initialize():
-	#for i in get_children():
-		#if i is Spawner:
-			#await get_tree().create_timer(randf_range(0.5, 1.5)).timeout
-			#i.spawn_entity(test_spawn)
 
 func _input(_event: InputEvent) -> void:
 	if Input.is_action_just_pressed("option"):
 		start_next_wave()
 
+
 func start_next_wave():
 	if waves.is_empty():
 		print("No more waves!")
 		return
-	# Get first wave resource in array.
-	var wave: WaveResource = waves.front()
-	# Get amount of possible spawner nodes.
-	var spawner_count = get_child_count() - 1
 	
+	GameManager.wave_started.emit()
+	
+	var wave: WaveResource = waves.front()
+	var spawner_count = get_child_count() - 1
+
 	for i in range(wave.light_enemies):
+		# Pick a random spawner node.
 		var random_index = rand.randi_range(0, spawner_count)
 		var spawner: Spawner = get_child(random_index)
 		spawner.spawn_entity(Refs.enemy_small)
+		
 		current_enemies += 1
 		await get_tree().create_timer(spawn_delay).timeout
+		
 	waves.erase(wave)
 
 

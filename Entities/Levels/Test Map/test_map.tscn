@@ -120,3 +120,7 @@ scene = ExtResource("2_07bv8")
 [node name="Spawner5" parent="WaveManager" instance=ExtResource("3_aebi7")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -20.788034, 0, -25.525995)
 scene = ExtResource("2_07bv8")
+
+[node name="Spawner6" parent="WaveManager" instance=ExtResource("3_aebi7")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -31.431494, 0, 4.9363537)
+scene = ExtResource("2_07bv8")

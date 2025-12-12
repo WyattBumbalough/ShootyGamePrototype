@@ -45,3 +45,4 @@ func set_target_location(new_position: Vector3):
 func die():
 	GameManager.enemy_killed.emit()
 	queue_free()
+	

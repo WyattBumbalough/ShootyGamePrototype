@@ -34,12 +34,12 @@ func _unhandled_input(event: InputEvent) -> void:
 		
 	eyes.rotation.x = clamp(eyes.rotation.x, deg_to_rad(-90), deg_to_rad(90))
 	
-	if Input.is_action_just_pressed("shoot"):
+	if Input.is_action_pressed("shoot"):
 		raycast()
 
 
 func _process(_delta: float) -> void:
-	enemy_count_label.text = "Enemies remaining: " + str(Refs.wave_manager.current_enemies)
+	enemy_count_label.text = "Enemies remaining: " + str(Global.wave_manager.current_enemies)
 
 
 func _physics_process(delta: float) -> void:
@@ -84,4 +84,4 @@ func raycast():
 		var collider = ray.get_collider()
 		#print(collider)
 		if collider is HitboxComponent:
-			collider.take_damage(50)
+			collider.take_damage.call_deferred(55.0)
