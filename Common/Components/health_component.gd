@@ -8,11 +8,14 @@ signal health_reached_zero
 @export var max_health: float = 100.0
 var current_health: float
 
+var dead: bool = false
+
 func _ready() -> void:
 	current_health = max_health
 
 func take_damage(_amount: float):
 	current_health -= _amount
 	damage_taken.emit(_amount)
-	if current_health <= 0.0:
+	if current_health <= 0.0 and !dead:
 		health_reached_zero.emit()
+		dead = true

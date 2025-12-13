@@ -85,3 +85,19 @@ func raycast():
 		#print(collider)
 		if collider is HitboxComponent:
 			collider.take_damage.call_deferred(55.0)
+	#var space_state = eyes.get_world_3d().direct_space_state
+	#var screen_center = get_viewport().size / 2
+	#var ray_origin = eyes.project_ray_origin(screen_center)
+	#var ray_end = ray_origin + eyes.project_ray_normal(screen_center) * 1000
+	#
+	#var query = PhysicsRayQueryParameters3D.create(ray_origin, ray_end)
+	#query.collide_with_areas = true
+	#query.collision_mask = 2
+	#
+	#var result = space_state.intersect_ray(query)
+	#if result:
+		#var collider = result.get("collider")
+		#print(collider)
+		#if collider is HitboxComponent:
+			#collider.take_damage(55.0)
+	

@@ -21,6 +21,11 @@ Global="*res://Common/Autoloads/Global.gd"
 Refs="*res://Common/Autoloads/Refs/Refs.tscn"
 GameManager="*res://Common/Autoloads/GameManager.gd"
 
+[display]
+
+window/size/viewport_width=1920
+window/size/viewport_height=1080
+
 [file_customization]
 
 folder_colors={
