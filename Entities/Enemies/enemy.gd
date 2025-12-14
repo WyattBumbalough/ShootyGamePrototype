@@ -11,25 +11,28 @@ class_name Enemy
 @export var animations: AnimationPlayer
 @export var nav_agent: NavigationAgent3D
 
+var path_offset: Vector3 = Vector3.ZERO
+
 func _ready():
 	# Docs say to not use await in _ready, but you need to wait a frame to give
 	# the navigation server time to sync. So this is how you do dat, BITCH.
 	setup.call_deferred()
-	
-	# Delete when health reaches zero
+	# Call die() when health reaches zero.
 	health_component.health_reached_zero.connect(die)
+	
 
 
 func setup():
 	await get_tree().physics_frame
-	nav_agent.target_position = Global.CurrentPlayer.global_position
-
+	path_offset += Vector3(randf_range(0.5,2.5), 0.0, randf_range(0.5,2.5))
+	set_target_location(Global.CurrentPlayer.global_position + path_offset)
+	move_speed += randf_range(1.0, 3.25)
 
 func _physics_process(_delta: float) -> void:
 	if nav_agent.is_navigation_finished():
 		return
 	
-	set_target_location(Global.CurrentPlayer.global_position)
+	set_target_location(Global.CurrentPlayer.global_position + path_offset)
 	
 	var current_pos: Vector3 = global_position
 	var next_pos: Vector3 = nav_agent.get_next_path_position()

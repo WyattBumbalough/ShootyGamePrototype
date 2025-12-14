@@ -1,12 +1,16 @@
-[gd_scene load_steps=15 format=3 uid="uid://dxpf6y10dmc1q"]
+[gd_scene load_steps=23 format=3 uid="uid://dxpf6y10dmc1q"]
 
 [ext_resource type="Script" uid="uid://cs730ueljjghv" path="res://Entities/Player/Player.gd" id="1_xhfnw"]
+[ext_resource type="Script" uid="uid://clxmkhw2qrcfq" path="res://Entities/Player/WeaponManager/weapon_manager.gd" id="2_jynvv"]
 [ext_resource type="Script" uid="uid://cmek1dcaubhxl" path="res://Common/State Machine/State_Machine.gd" id="2_ww0jn"]
+[ext_resource type="PackedScene" uid="uid://rfbus4ve3avp" path="res://Entities/Weapons/weapon.tscn" id="3_lmeus"]
 [ext_resource type="Script" uid="uid://b51yfegyf271a" path="res://Entities/Player/States/Idle.gd" id="3_vweq0"]
 [ext_resource type="Script" uid="uid://dafeehxt4nr28" path="res://Entities/Player/States/Moving.gd" id="4_1des2"]
+[ext_resource type="PackedScene" uid="uid://c2q2umuw4re60" path="res://Entities/Weapons/weapon_2.tscn" id="4_061yh"]
 [ext_resource type="Script" uid="uid://y0he0fi2dn52" path="res://Entities/Player/States/Falling.gd" id="5_an6q6"]
 [ext_resource type="Script" uid="uid://c5lf3ml8immra" path="res://Entities/Player/States/Jump.gd" id="6_t38ms"]
 [ext_resource type="Texture2D" uid="uid://cb4ydn7v8canl" path="res://Assets/Textures/crosshair001.png" id="7_hj1c0"]
+[ext_resource type="Script" uid="uid://d1e1lxhhbvbdh" path="res://Entities/Player/nav_point.gd" id="8_x44r4"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_t38ms"]
 albedo_color = Color(1, 0.47058824, 0.20784314, 1)
@@ -31,8 +35,67 @@ outline_size = 1
 outline_color = Color(0, 0, 0, 1)
 shadow_color = Color(0, 0, 0, 0.49803922)
 
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_x44r4"]
+content_margin_top = 25.0
+content_margin_right = 25.0
+
+[sub_resource type="LabelSettings" id="LabelSettings_761t5"]
+font_size = 32
+outline_size = 1
+outline_color = Color(0, 0, 0, 1)
+shadow_color = Color(0, 0, 0, 0.7019608)
+
+[sub_resource type="SphereMesh" id="SphereMesh_hj1c0"]
+radius = 0.25
+height = 0.5
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_761t5"]
+shading_mode = 0
+albedo_color = Color(0.14699998, 0.98, 0, 1)
+
 [node name="Player" type="CharacterBody3D"]
 script = ExtResource("1_xhfnw")
+
+[node name="Head" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.25, 0)
+
+[node name="Eyes" type="Camera3D" parent="Head"]
+cull_mask = 524287
+
+[node name="TestRaycast" type="RayCast3D" parent="Head/Eyes"]
+enabled = false
+target_position = Vector3(0, 0, -500)
+collision_mask = 2
+hit_from_inside = true
+collide_with_areas = true
+
+[node name="WeaponManager" type="Node3D" parent="Head/Eyes" node_paths=PackedStringArray("all_weapons")]
+script = ExtResource("2_jynvv")
+all_weapons = [NodePath("Weapon"), NodePath("Weapon2")]
+
+[node name="Weapon" parent="Head/Eyes/WeaponManager" instance=ExtResource("3_lmeus")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.3208211, -0.3224702, -0.83970886)
+visible = false
+
+[node name="Weapon2" parent="Head/Eyes/WeaponManager" instance=ExtResource("4_061yh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.31308162, -0.28720427, -0.9235222)
+visible = false
+
+[node name="Schnoz" type="MeshInstance3D" parent="Head"]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, -0.40500748, -0.5736566)
+layers = 524288
+mesh = SubResource("PrismMesh_hj1c0")
+skeleton = NodePath("../..")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+layers = 524288
+cast_shadow = 0
+mesh = SubResource("CapsuleMesh_kpjcp")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+shape = SubResource("CapsuleShape3D_kne1u")
 
 [node name="PlayerStateMachine" type="Node" parent="." node_paths=PackedStringArray("starting_state")]
 unique_name_in_owner = true
@@ -71,39 +134,6 @@ idle_state = NodePath("../Idle")
 jump_state = NodePath(".")
 falling_state = NodePath("../Falling")
 moving_state = NodePath("../Moving")
-
-[node name="Head" type="Node3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.25, 0)
-
-[node name="Eyes" type="Camera3D" parent="Head"]
-cull_mask = 524287
-
-[node name="TestRaycast" type="RayCast3D" parent="Head/Eyes"]
-enabled = false
-target_position = Vector3(0, 0, -500)
-collision_mask = 2
-hit_from_inside = true
-collide_with_areas = true
-
-[node name="Schnoz" type="MeshInstance3D" parent="Head"]
-transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, -0.40500748, -0.5736566)
-layers = 524288
-mesh = SubResource("PrismMesh_hj1c0")
-skeleton = NodePath("../..")
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
-layers = 524288
-cast_shadow = 0
-mesh = SubResource("CapsuleMesh_kpjcp")
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
-shape = SubResource("CapsuleShape3D_kne1u")
-
-[node name="CurrentState" type="Label" parent="."]
-offset_right = 40.0
-offset_bottom = 23.0
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
@@ -155,3 +185,84 @@ size_flags_horizontal = 0
 theme_override_styles/normal = SubResource("StyleBoxEmpty_hj1c0")
 text = "Enemies remaining: "
 label_settings = SubResource("LabelSettings_x44r4")
+
+[node name="CurrentState" type="Label" parent="CanvasLayer/Control"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -40.0
+offset_bottom = 23.0
+grow_horizontal = 0
+theme_override_styles/normal = SubResource("StyleBoxEmpty_x44r4")
+text = "Walking"
+label_settings = SubResource("LabelSettings_761t5")
+
+[node name="NavPointsInner" type="Node3D" parent="."]
+unique_name_in_owner = true
+visible = false
+
+[node name="pt1" type="MeshInstance3D" parent="NavPointsInner"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.5, 0.25, 0)
+layers = 524288
+cast_shadow = 0
+mesh = SubResource("SphereMesh_hj1c0")
+surface_material_override/0 = SubResource("StandardMaterial3D_761t5")
+script = ExtResource("8_x44r4")
+
+[node name="pt2" type="MeshInstance3D" parent="NavPointsInner"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.5, 0.25, 0)
+layers = 524288
+cast_shadow = 0
+mesh = SubResource("SphereMesh_hj1c0")
+surface_material_override/0 = SubResource("StandardMaterial3D_761t5")
+script = ExtResource("8_x44r4")
+
+[node name="pt3" type="MeshInstance3D" parent="NavPointsInner"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.25, 2.5)
+layers = 524288
+cast_shadow = 0
+mesh = SubResource("SphereMesh_hj1c0")
+surface_material_override/0 = SubResource("StandardMaterial3D_761t5")
+script = ExtResource("8_x44r4")
+
+[node name="pt4" type="MeshInstance3D" parent="NavPointsInner"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.25, -2.5)
+layers = 524288
+cast_shadow = 0
+mesh = SubResource("SphereMesh_hj1c0")
+surface_material_override/0 = SubResource("StandardMaterial3D_761t5")
+script = ExtResource("8_x44r4")
+
+[node name="pt5" type="MeshInstance3D" parent="NavPointsInner"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.75, 0.25, -1.75)
+layers = 524288
+cast_shadow = 0
+mesh = SubResource("SphereMesh_hj1c0")
+surface_material_override/0 = SubResource("StandardMaterial3D_761t5")
+script = ExtResource("8_x44r4")
+
+[node name="pt6" type="MeshInstance3D" parent="NavPointsInner"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.75, 0.25, -1.75)
+layers = 524288
+cast_shadow = 0
+mesh = SubResource("SphereMesh_hj1c0")
+surface_material_override/0 = SubResource("StandardMaterial3D_761t5")
+script = ExtResource("8_x44r4")
+
+[node name="pt7" type="MeshInstance3D" parent="NavPointsInner"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.75, 0.25, 1.75)
+layers = 524288
+cast_shadow = 0
+mesh = SubResource("SphereMesh_hj1c0")
+surface_material_override/0 = SubResource("StandardMaterial3D_761t5")
+script = ExtResource("8_x44r4")
+
+[node name="pt8" type="MeshInstance3D" parent="NavPointsInner"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.75, 0.25, 1.75)
+layers = 524288
+cast_shadow = 0
+mesh = SubResource("SphereMesh_hj1c0")
+surface_material_override/0 = SubResource("StandardMaterial3D_761t5")
+script = ExtResource("8_x44r4")

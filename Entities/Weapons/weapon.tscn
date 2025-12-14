@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://rfbus4ve3avp"]
+
+[ext_resource type="Script" uid="uid://dy4ll702xan8b" path="res://Entities/Weapons/weapon.gd" id="1_cyk6p"]
+
+[node name="Weapon" type="Node3D"]
+script = ExtResource("1_cyk6p")
+
+[node name="CSGBox3D" type="CSGBox3D" parent="."]
+size = Vector3(0.16503906, 0.20336914, 0.9180908)

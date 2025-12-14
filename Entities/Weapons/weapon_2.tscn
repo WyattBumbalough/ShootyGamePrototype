@@ -1,0 +1,15 @@
+[gd_scene load_steps=3 format=3 uid="uid://c2q2umuw4re60"]
+
+[ext_resource type="Script" uid="uid://dy4ll702xan8b" path="res://Entities/Weapons/weapon.gd" id="1_h0nc0"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_2b4fw"]
+albedo_color = Color(1, 0, 0, 1)
+
+[node name="Weapon2" type="Node3D"]
+script = ExtResource("1_h0nc0")
+metadata/_custom_type_script = "uid://dy4ll702xan8b"
+
+[node name="CSGBox3D" type="CSGBox3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.125, 0)
+size = Vector3(0.5, 0.25, 1)
+material = SubResource("StandardMaterial3D_2b4fw")

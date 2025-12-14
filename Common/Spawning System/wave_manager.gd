@@ -21,7 +21,8 @@ func _ready() -> void:
 
 
 func load_wave():
-	var wave = waves.front()
+	var wave = waves.pop_front()
+	
 	for s in range(wave.light_enemies):
 		var e = EnemyResource.new()
 		e.type = Global.ENEMY_TYPES.LIGHT
@@ -61,24 +62,23 @@ func spawn_enemy():
 		_spawner.spawn_entity(Refs.enemy_heavy)
 	spawn_pool.remove_at(0)
 
+
 func get_random_spawner():
 	var spawner_count = get_child_count() - 1
 	var random_inx = rand.randi_range(0, spawner_count)
 	var spawner: Spawner = get_child(random_inx)
 	return spawner
 
+
 func _on_enemy_killed():
 	dead_enemies += 1
 	current_enemies -= 1
-	
 	await get_tree().create_timer(0.5).timeout
 	
 	if spawn_pool.size() > 0:
 		spawn_enemy()
-	 
 	if current_enemies == 0:
 		GameManager.wave_ended.emit()
-
 
 
 func _input(_event: InputEvent) -> void:

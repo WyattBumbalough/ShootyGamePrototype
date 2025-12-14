@@ -1,7 +1,7 @@
 extends Resource
 class_name WaveResource
 
-@export var difficulty: Global.WAVE_DIFF
+#@export var difficulty: Global.WAVE_DIFF
 @export_category("Amounts")
 @export var light_enemies: int
 @export var medium_enemies: int

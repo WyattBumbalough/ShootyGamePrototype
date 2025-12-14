@@ -6,6 +6,8 @@ class_name Player
 @onready var head: Node3D = $Head
 @onready var eyes: Camera3D = $Head/Eyes
 @onready var enemy_count_label: Label = %EnemyCountLabel
+@onready var nav_points_inner: Node3D = %NavPointsInner
+
 #--References End--
 
 #--Variables--
@@ -48,7 +50,7 @@ func _process(_delta: float) -> void:
 
 func _physics_process(delta: float) -> void:
 	#Display the current state.
-	$CurrentState.text = player_state_machine.current_state.name
+	%CurrentState.text = player_state_machine.current_state.name
 	player_state_machine.handle_physics(delta)
 	# Gravity
 	if not is_on_floor():
@@ -88,3 +90,7 @@ func raycast():
 		var collider = ray.get_collider()
 		if collider is HitboxComponent:
 			collider.take_damage.call_deferred(55.0)
+
+
+func get_nav_points() -> Array:
+	return nav_points_inner.get_children()

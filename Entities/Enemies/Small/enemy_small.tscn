@@ -1,8 +1,8 @@
 [gd_scene load_steps=8 format=3 uid="uid://b58n3ea82dc54"]
 
-[ext_resource type="Script" uid="uid://b5aers873e8rj" path="res://Entities/Enemies/enemy.gd" id="1_7o3vr"]
-[ext_resource type="Script" uid="uid://c0lh3xudunkd8" path="res://Common/Components/health_component.gd" id="2_xjxf0"]
-[ext_resource type="Script" uid="uid://bnh6tgipmolts" path="res://Common/Components/hitbox_component.gd" id="3_08bp1"]
+[ext_resource type="Script" uid="uid://b5aers873e8rj" path="res://Entities/Enemies/enemy.gd" id="1_afgpb"]
+[ext_resource type="Script" uid="uid://c0lh3xudunkd8" path="res://Common/Components/health_component.gd" id="2_mipfx"]
+[ext_resource type="Script" uid="uid://bnh6tgipmolts" path="res://Common/Components/hitbox_component.gd" id="3_1ei65"]
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_wbf3x"]
 height = 1.5
@@ -18,7 +18,7 @@ radius = 0.6
 height = 1.5
 
 [node name="EnemySmall" type="CharacterBody3D" node_paths=PackedStringArray("health_component", "hitbox_component", "animations", "nav_agent")]
-script = ExtResource("1_7o3vr")
+script = ExtResource("1_afgpb")
 move_speed = 5.0
 health_component = NodePath("HealthComponent")
 hitbox_component = NodePath("HitboxComponent")
@@ -35,16 +35,18 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.75, 0)
 shape = SubResource("CapsuleShape3D_6rqwt")
 
 [node name="NavigationAgent3D" type="NavigationAgent3D" parent="."]
+avoidance_enabled = true
+radius = 10.0
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 
 [node name="HealthComponent" type="Node" parent="."]
-script = ExtResource("2_xjxf0")
+script = ExtResource("2_mipfx")
 max_health = 50.0
 
 [node name="HitboxComponent" type="Area3D" parent="." node_paths=PackedStringArray("health_component")]
 collision_layer = 3
-script = ExtResource("3_08bp1")
+script = ExtResource("3_1ei65")
 health_component = NodePath("../HealthComponent")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="HitboxComponent"]
