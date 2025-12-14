@@ -6,8 +6,6 @@ class_name Player
 @onready var head: Node3D = $Head
 @onready var eyes: Camera3D = $Head/Eyes
 @onready var enemy_count_label: Label = %EnemyCountLabel
-
-
 #--References End--
 
 #--Variables--
@@ -34,7 +32,13 @@ func _unhandled_input(event: InputEvent) -> void:
 		
 	eyes.rotation.x = clamp(eyes.rotation.x, deg_to_rad(-90), deg_to_rad(90))
 	
-	if Input.is_action_pressed("shoot"):
+	if Input.is_action_just_pressed("esc"):
+		if Input.mouse_mode == Input.MOUSE_MODE_CAPTURED:
+			Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
+		else:
+			Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
+	
+	if Input.is_action_just_pressed("shoot"):
 		raycast()
 
 
@@ -82,22 +86,5 @@ func raycast():
 	ray.force_raycast_update()
 	if ray.is_colliding():
 		var collider = ray.get_collider()
-		#print(collider)
 		if collider is HitboxComponent:
 			collider.take_damage.call_deferred(55.0)
-	#var space_state = eyes.get_world_3d().direct_space_state
-	#var screen_center = get_viewport().size / 2
-	#var ray_origin = eyes.project_ray_origin(screen_center)
-	#var ray_end = ray_origin + eyes.project_ray_normal(screen_center) * 1000
-	#
-	#var query = PhysicsRayQueryParameters3D.create(ray_origin, ray_end)
-	#query.collide_with_areas = true
-	#query.collision_mask = 2
-	#
-	#var result = space_state.intersect_ray(query)
-	#if result:
-		#var collider = result.get("collider")
-		#print(collider)
-		#if collider is HitboxComponent:
-			#collider.take_damage(55.0)
-	

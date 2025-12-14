@@ -54,6 +54,7 @@ idle_state = NodePath("../Idle")
 jump_state = NodePath("../Jump")
 falling_state = NodePath("../Falling")
 moving_state = NodePath(".")
+accel = 0.25
 
 [node name="Falling" type="Node" parent="PlayerStateMachine" node_paths=PackedStringArray("idle_state", "jump_state", "falling_state", "moving_state")]
 script = ExtResource("5_an6q6")
@@ -65,14 +66,14 @@ friction = 0.25
 
 [node name="Jump" type="Node" parent="PlayerStateMachine" node_paths=PackedStringArray("idle_state", "jump_state", "falling_state", "moving_state")]
 script = ExtResource("6_t38ms")
-jump_force = 5.0
+jump_force = 7.5
 idle_state = NodePath("../Idle")
 jump_state = NodePath(".")
 falling_state = NodePath("../Falling")
 moving_state = NodePath("../Moving")
 
 [node name="Head" type="Node3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.25, 0)
 
 [node name="Eyes" type="Camera3D" parent="Head"]
 cull_mask = 524287
@@ -83,7 +84,6 @@ target_position = Vector3(0, 0, -500)
 collision_mask = 2
 hit_from_inside = true
 collide_with_areas = true
-collide_with_bodies = false
 
 [node name="Schnoz" type="MeshInstance3D" parent="Head"]
 transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, -0.40500748, -0.5736566)
@@ -93,6 +93,7 @@ skeleton = NodePath("../..")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+layers = 524288
 cast_shadow = 0
 mesh = SubResource("CapsuleMesh_kpjcp")
 

@@ -11,8 +11,6 @@ var active: bool = true
 
 func _ready() -> void:
 	$Mesh.hide()
-	
-	#spawn_entity(scene)
 
 func _process(_delta: float) -> void:
 	if Engine.is_editor_hint():

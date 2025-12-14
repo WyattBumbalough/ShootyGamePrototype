@@ -1,8 +1,8 @@
 [gd_scene load_steps=4 format=3 uid="uid://dudx33fw4p3ia"]
 
 [ext_resource type="Script" uid="uid://daf1hvam3yjp6" path="res://Common/Autoloads/Refs/Refs.gd" id="1_tl4f7"]
-[ext_resource type="PackedScene" uid="uid://b58n3ea82dc54" path="res://Entities/Enemies/enemy_small.tscn" id="2_ufthw"]
-[ext_resource type="PackedScene" uid="uid://d3slh1ctv0m0q" path="res://Entities/Enemies/enemy_medium.tscn" id="3_gtkuq"]
+[ext_resource type="PackedScene" uid="uid://b58n3ea82dc54" path="res://Entities/Enemies/Small/enemy_small.tscn" id="2_ufthw"]
+[ext_resource type="PackedScene" uid="uid://d3slh1ctv0m0q" path="res://Entities/Enemies/Medium/enemy_medium.tscn" id="3_gtkuq"]
 
 [node name="Refs" type="Node"]
 script = ExtResource("1_tl4f7")
