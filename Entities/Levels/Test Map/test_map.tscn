@@ -102,7 +102,6 @@ volumetric_fog_sky_affect = 0.0
 
 [node name="WaveManager" type="Node" parent="."]
 script = ExtResource("2_mrbiv")
-max_spawn_amount = 5
 waves = Array[ExtResource("3_6s2aa")]([SubResource("Resource_u68xo"), SubResource("Resource_ayqeu"), SubResource("Resource_5brj3")])
 
 [node name="Spawner" parent="WaveManager" instance=ExtResource("3_aebi7")]

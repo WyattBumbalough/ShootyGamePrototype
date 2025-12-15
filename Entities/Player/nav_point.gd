@@ -10,6 +10,7 @@ func _ready() -> void:
 	#mat = get_surface_override_material(0)
 	mat = StandardMaterial3D.new()
 	mat.albedo_color = Color.GREEN
+	mat.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
 	set_surface_override_material(0, mat)
 	
 	

@@ -23,3 +23,5 @@ func _input(_event: InputEvent) -> void:
 		current_weapon = all_weapons[index]
 		current_weapon.equip()
 		
+	if Input.is_action_just_pressed("shoot"):
+		current_weapon.shoot()

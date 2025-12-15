@@ -25,7 +25,6 @@ func _ready():
 	setup.call_deferred()
 	# Call die() when health reaches zero.
 	health_component.health_reached_zero.connect(die)
-	
 
 
 func setup():
@@ -55,7 +54,7 @@ func _physics_process(_delta: float) -> void:
 	velocity = dir * move_speed
 	
 	var rotation_speed = 4
-	var target_rotation = dir.signed_angle_to(-Vector3.MODEL_FRONT, Vector3.DOWN)
+	var target_rotation = dir.signed_angle_to(Vector3.MODEL_REAR, Vector3.DOWN)
 	if abs(target_rotation - rotation.y) > deg_to_rad(60):
 		rotation_speed = 20 # Rotates faster if more than 60 deg required.
 	rotation.y = move_toward(rotation.y, target_rotation, _delta * rotation_speed)
