@@ -10,8 +10,7 @@ func _ready() -> void:
 	current_weapon.equip()
 
 
-func _input(event: InputEvent) -> void:
-	
+func _input(_event: InputEvent) -> void:
 	if Input.is_action_pressed("scrollup"):
 		index = min(index + 1, all_weapons.size() - 1)
 		current_weapon.unequip()

@@ -6,4 +6,9 @@
 script = ExtResource("1_cyk6p")
 
 [node name="CSGBox3D" type="CSGBox3D" parent="."]
-size = Vector3(0.16503906, 0.20336914, 0.9180908)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.020080566, 0)
+size = Vector3(0.12695313, 0.16320801, 0.4609375)
+
+[node name="CSGBox3D2" type="CSGBox3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, -1, 0, 1, -4.371139e-08, 0, -0.121017456, 0.1393832)
+size = Vector3(0.095703125, 0.13305664, 0.20297241)

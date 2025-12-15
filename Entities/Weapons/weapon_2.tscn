@@ -10,6 +10,11 @@ script = ExtResource("1_h0nc0")
 metadata/_custom_type_script = "uid://dy4ll702xan8b"
 
 [node name="CSGBox3D" type="CSGBox3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.125, 0)
-size = Vector3(0.5, 0.25, 1)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.1282381, -0.125, 0)
+size = Vector3(0.22705078, 0.25, 1)
+material = SubResource("StandardMaterial3D_2b4fw")
+
+[node name="CSGBox3D2" type="CSGBox3D" parent="."]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0.10742149, -0.125, 0)
+size = Vector3(0.22705078, 0.25, 1)
 material = SubResource("StandardMaterial3D_2b4fw")

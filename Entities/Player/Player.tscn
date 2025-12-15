@@ -1,7 +1,7 @@
-[gd_scene load_steps=23 format=3 uid="uid://dxpf6y10dmc1q"]
+[gd_scene load_steps=21 format=3 uid="uid://dxpf6y10dmc1q"]
 
 [ext_resource type="Script" uid="uid://cs730ueljjghv" path="res://Entities/Player/Player.gd" id="1_xhfnw"]
-[ext_resource type="Script" uid="uid://clxmkhw2qrcfq" path="res://Entities/Player/WeaponManager/weapon_manager.gd" id="2_jynvv"]
+[ext_resource type="Script" uid="uid://clxmkhw2qrcfq" path="res://Entities/Weapons/WeaponManager/weapon_manager.gd" id="2_jynvv"]
 [ext_resource type="Script" uid="uid://cmek1dcaubhxl" path="res://Common/State Machine/State_Machine.gd" id="2_ww0jn"]
 [ext_resource type="PackedScene" uid="uid://rfbus4ve3avp" path="res://Entities/Weapons/weapon.tscn" id="3_lmeus"]
 [ext_resource type="Script" uid="uid://b51yfegyf271a" path="res://Entities/Player/States/Idle.gd" id="3_vweq0"]
@@ -10,7 +10,7 @@
 [ext_resource type="Script" uid="uid://y0he0fi2dn52" path="res://Entities/Player/States/Falling.gd" id="5_an6q6"]
 [ext_resource type="Script" uid="uid://c5lf3ml8immra" path="res://Entities/Player/States/Jump.gd" id="6_t38ms"]
 [ext_resource type="Texture2D" uid="uid://cb4ydn7v8canl" path="res://Assets/Textures/crosshair001.png" id="7_hj1c0"]
-[ext_resource type="Script" uid="uid://d1e1lxhhbvbdh" path="res://Entities/Player/nav_point.gd" id="8_x44r4"]
+[ext_resource type="PackedScene" uid="uid://cgaokdy727hb0" path="res://Entities/Player/navpoint.tscn" id="11_jynvv"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_t38ms"]
 albedo_color = Color(1, 0.47058824, 0.20784314, 1)
@@ -44,14 +44,6 @@ font_size = 32
 outline_size = 1
 outline_color = Color(0, 0, 0, 1)
 shadow_color = Color(0, 0, 0, 0.7019608)
-
-[sub_resource type="SphereMesh" id="SphereMesh_hj1c0"]
-radius = 0.25
-height = 0.5
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_761t5"]
-shading_mode = 0
-albedo_color = Color(0.14699998, 0.98, 0, 1)
 
 [node name="Player" type="CharacterBody3D"]
 script = ExtResource("1_xhfnw")
@@ -201,68 +193,27 @@ label_settings = SubResource("LabelSettings_761t5")
 
 [node name="NavPointsInner" type="Node3D" parent="."]
 unique_name_in_owner = true
-visible = false
 
-[node name="pt1" type="MeshInstance3D" parent="NavPointsInner"]
+[node name="pt1" parent="NavPointsInner" instance=ExtResource("11_jynvv")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.5, 0.25, 0)
-layers = 524288
-cast_shadow = 0
-mesh = SubResource("SphereMesh_hj1c0")
-surface_material_override/0 = SubResource("StandardMaterial3D_761t5")
-script = ExtResource("8_x44r4")
 
-[node name="pt2" type="MeshInstance3D" parent="NavPointsInner"]
+[node name="pt2" parent="NavPointsInner" instance=ExtResource("11_jynvv")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.5, 0.25, 0)
-layers = 524288
-cast_shadow = 0
-mesh = SubResource("SphereMesh_hj1c0")
-surface_material_override/0 = SubResource("StandardMaterial3D_761t5")
-script = ExtResource("8_x44r4")
 
-[node name="pt3" type="MeshInstance3D" parent="NavPointsInner"]
+[node name="pt3" parent="NavPointsInner" instance=ExtResource("11_jynvv")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.25, 2.5)
-layers = 524288
-cast_shadow = 0
-mesh = SubResource("SphereMesh_hj1c0")
-surface_material_override/0 = SubResource("StandardMaterial3D_761t5")
-script = ExtResource("8_x44r4")
 
-[node name="pt4" type="MeshInstance3D" parent="NavPointsInner"]
+[node name="pt4" parent="NavPointsInner" instance=ExtResource("11_jynvv")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.25, -2.5)
-layers = 524288
-cast_shadow = 0
-mesh = SubResource("SphereMesh_hj1c0")
-surface_material_override/0 = SubResource("StandardMaterial3D_761t5")
-script = ExtResource("8_x44r4")
 
-[node name="pt5" type="MeshInstance3D" parent="NavPointsInner"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.75, 0.25, -1.75)
-layers = 524288
-cast_shadow = 0
-mesh = SubResource("SphereMesh_hj1c0")
-surface_material_override/0 = SubResource("StandardMaterial3D_761t5")
-script = ExtResource("8_x44r4")
-
-[node name="pt6" type="MeshInstance3D" parent="NavPointsInner"]
+[node name="pt5" parent="NavPointsInner" instance=ExtResource("11_jynvv")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.75, 0.25, -1.75)
-layers = 524288
-cast_shadow = 0
-mesh = SubResource("SphereMesh_hj1c0")
-surface_material_override/0 = SubResource("StandardMaterial3D_761t5")
-script = ExtResource("8_x44r4")
 
-[node name="pt7" type="MeshInstance3D" parent="NavPointsInner"]
+[node name="pt6" parent="NavPointsInner" instance=ExtResource("11_jynvv")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.75, 0.25, 1.75)
-layers = 524288
-cast_shadow = 0
-mesh = SubResource("SphereMesh_hj1c0")
-surface_material_override/0 = SubResource("StandardMaterial3D_761t5")
-script = ExtResource("8_x44r4")
 
-[node name="pt8" type="MeshInstance3D" parent="NavPointsInner"]
+[node name="pt7" parent="NavPointsInner" instance=ExtResource("11_jynvv")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.75, 0.25, 1.75)
-layers = 524288
-cast_shadow = 0
-mesh = SubResource("SphereMesh_hj1c0")
-surface_material_override/0 = SubResource("StandardMaterial3D_761t5")
-script = ExtResource("8_x44r4")
+
+[node name="pt8" parent="NavPointsInner" instance=ExtResource("11_jynvv")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.75, 0.25, -1.75)

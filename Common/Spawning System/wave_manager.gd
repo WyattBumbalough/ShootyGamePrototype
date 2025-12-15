@@ -2,9 +2,8 @@ extends Node
 class_name WaveManager
 
 @export_group("Wave settings")
-@export var max_spawn_amount: int = 10
-#@export var wave_difficulty: Global.WAVE_DIFF
-@export var spawn_delay: float = 0.25
+@export var max_spawn_amount: int = 10 ## Maximum amount of entities that can be spawned at the same time.
+@export var spawn_delay: float = 0.25 ## Time between each entity spawn.
 @export var waves: Array[WaveResource] = []
 
 @onready var rand = RandomNumberGenerator.new()
@@ -17,12 +16,15 @@ var spawn_pool: Array[EnemyResource] = []
 func _ready() -> void:
 	Global.wave_manager = self
 	GameManager.enemy_killed.connect(_on_enemy_killed)
-	load_wave()
+	#load_wave()
 
 
 func load_wave():
+	# Get and remove the first wave resource from waves array.
 	var wave = waves.pop_front()
 	
+	# Create an amount of enemy reources equal to amount of each type in the wave
+	# resource, then load them into the spawn pool.
 	for s in range(wave.light_enemies):
 		var e = EnemyResource.new()
 		e.type = Global.ENEMY_TYPES.LIGHT
@@ -35,10 +37,12 @@ func load_wave():
 		var e = EnemyResource.new()
 		e.type = Global.ENEMY_TYPES.HEAVY
 		spawn_pool.append(e)
+	
+	start_wave()
 
 
 func start_wave():
-	spawn_pool.shuffle()
+	spawn_pool.shuffle() # Randomize the spawn pool.
 	
 	var total_spawns = spawn_pool.size()
 	var spawn_amount = min(total_spawns, max_spawn_amount)
@@ -52,15 +56,15 @@ func start_wave():
 
 
 func spawn_enemy():
-	var _enemy = spawn_pool.front()
+	var _enemy = spawn_pool.pop_front()
 	var _spawner = get_random_spawner()
+	
 	if _enemy.type == Global.ENEMY_TYPES.LIGHT:
 		_spawner.spawn_entity(Refs.enemy_small)
 	elif _enemy.type == Global.ENEMY_TYPES.MEDIUM:
 		_spawner.spawn_entity(Refs.enemy_medium)
 	else:
 		_spawner.spawn_entity(Refs.enemy_heavy)
-	spawn_pool.remove_at(0)
 
 
 func get_random_spawner():
@@ -82,5 +86,5 @@ func _on_enemy_killed():
 
 
 func _input(_event: InputEvent) -> void:
-	if Input.is_action_just_pressed("option"):
-		start_wave()
+	if Input.is_action_just_pressed("option") and not waves.is_empty():
+		load_wave()

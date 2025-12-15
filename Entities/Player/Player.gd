@@ -6,7 +6,7 @@ class_name Player
 @onready var head: Node3D = $Head
 @onready var eyes: Camera3D = $Head/Eyes
 @onready var enemy_count_label: Label = %EnemyCountLabel
-@onready var nav_points_inner: Node3D = %NavPointsInner
+@onready var nav_points: Node3D = %NavPointsInner
 
 #--References End--
 
@@ -15,6 +15,7 @@ var lock_mouse: bool
 var mouse_sens = 0.005
 var can_move: bool = true
 #--Variables end--
+
 
 func _ready() -> void:
 		Global.CurrentPlayer = self
@@ -93,4 +94,19 @@ func raycast():
 
 
 func get_nav_points() -> Array:
-	return nav_points_inner.get_children()
+	return nav_points.get_children()
+
+
+func get_available_navpoint() -> NavPoint:
+	var available_points: Array
+	for n: NavPoint in nav_points.get_children():
+		if n.claimed == false:
+			available_points.append(n)
+	if available_points.is_empty():
+		printerr("No more available navpoints!")
+		return null
+	var amount = available_points.size() - 1
+	var i = randi_range(0, amount)
+	var nav: NavPoint = available_points.get(i)
+	
+	return nav

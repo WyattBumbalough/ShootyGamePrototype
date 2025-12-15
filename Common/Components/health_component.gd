@@ -16,6 +16,5 @@ func _ready() -> void:
 func take_damage(_amount: float):
 	current_health -= _amount
 	damage_taken.emit(_amount)
-	if current_health <= 0.0 and !dead:
+	if current_health <= 0.0:
 		health_reached_zero.emit()
-		dead = true
