@@ -11,10 +11,11 @@ var previous_state: State
 #--Exports End--
 
 func initialize(Char: CharacterBody3D):
-		Global.PlayerStateMachine = self
-		for i in get_children():
-			if i is State:
-				i.Char = Char
+	#if Char is Player:
+		#Global.PlayerStateMachine = self
+	for i in get_children():
+		if i is State:
+			i.Char = Char
 
 		change_state(starting_state)
 

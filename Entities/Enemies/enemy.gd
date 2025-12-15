@@ -8,6 +8,7 @@ class_name Enemy
 @export_category("Nodes")
 @export var health_component: HealthComponent
 @export var hitbox_component: HitboxComponent
+@export var state_machine: StateMachine
 @export var mesh: MeshInstance3D
 @export var animations: AnimationPlayer
 @export var nav_agent: NavigationAgent3D

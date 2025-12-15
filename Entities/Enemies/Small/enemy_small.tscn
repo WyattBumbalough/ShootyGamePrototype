@@ -1,8 +1,9 @@
-[gd_scene load_steps=10 format=3 uid="uid://b58n3ea82dc54"]
+[gd_scene load_steps=11 format=3 uid="uid://b58n3ea82dc54"]
 
 [ext_resource type="Script" uid="uid://b5aers873e8rj" path="res://Entities/Enemies/enemy.gd" id="1_afgpb"]
 [ext_resource type="Script" uid="uid://c0lh3xudunkd8" path="res://Common/Components/health_component.gd" id="2_mipfx"]
 [ext_resource type="Script" uid="uid://bnh6tgipmolts" path="res://Common/Components/hitbox_component.gd" id="3_1ei65"]
+[ext_resource type="Script" uid="uid://cmek1dcaubhxl" path="res://Common/State Machine/State_Machine.gd" id="4_mipfx"]
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_wbf3x"]
 height = 1.5
@@ -61,7 +62,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.75, 0)
 shape = SubResource("CapsuleShape3D_6rqwt")
 
 [node name="NavigationAgent3D" type="NavigationAgent3D" parent="."]
-avoidance_enabled = true
 radius = 10.0
 debug_enabled = true
 
@@ -80,3 +80,7 @@ health_component = NodePath("../HealthComponent")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.75, 0)
 shape = SubResource("CapsuleShape3D_08bp1")
 debug_color = Color(0.9607843, 0, 0.26666668, 0.84705883)
+
+[node name="StateMachine" type="Node" parent="."]
+script = ExtResource("4_mipfx")
+metadata/_custom_type_script = "uid://cmek1dcaubhxl"

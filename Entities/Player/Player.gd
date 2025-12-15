@@ -19,6 +19,8 @@ var can_move: bool = true
 
 func _ready() -> void:
 		Global.CurrentPlayer = self
+		Global.PlayerStateMachine = player_state_machine
+		
 		Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 		player_state_machine.initialize(self)
 		
