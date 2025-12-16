@@ -1,12 +1,328 @@
-[gd_scene load_steps=3 format=3 uid="uid://c2q2umuw4re60"]
+[gd_scene load_steps=9 format=3 uid="uid://c2q2umuw4re60"]
 
-[ext_resource type="Script" uid="uid://dy4ll702xan8b" path="res://Entities/Weapons/weapon.gd" id="1_h0nc0"]
+[ext_resource type="Script" uid="uid://dnra5p7weo6qc" path="res://Entities/Weapons/test_weapon2.gd" id="1_h0nc0"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_2b4fw"]
 albedo_color = Color(1, 0, 0, 1)
 
-[node name="Weapon2" type="Node3D"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_h0nc0"]
+albedo_color = Color(0.30936998, 0.17718795, 0.020283502, 1)
+
+[sub_resource type="Animation" id="Animation_ik0wd"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CSGBox3D:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(-0.1282381, -0.125, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("CSGBox3D2:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0.10742149, -0.125, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("CSGBox3D:rotation")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0, 0)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("CSGBox3D2:rotation")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, -3.1415925, 0)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("CSGBox3D3:position")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(-0.01319335, -0.125, 0.61616063)]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("CSGBox3D3:rotation")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 1.5715818, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_3vmjn"]
+resource_name = "reload"
+length = 1.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CSGBox3D:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.16666667, 0.33333334, 0.70000005, 0.9, 1.0333333),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector3(-0.1282381, -0.125, 0), Vector3(-0.1282381, 0.006720662, 0), Vector3(-0.1282381, -0.58970314, 0.060571786), Vector3(-0.1282381, -0.9538832, 0.023456216), Vector3(-0.1282381, -0.58230424, 0.0030266084), Vector3(-0.1282381, -0.125, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("CSGBox3D2:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.16666667, 0.33333334, 0.70000005, 0.9, 1.0333333),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector3(0.10742149, -0.125, 0), Vector3(0.10742149, 0.006720662, 0), Vector3(0.10742149, -0.58970314, 0.060571786), Vector3(0.10742149, -0.9538832, 0.023456216), Vector3(0.10742149, -0.58230424, 0.0030266084), Vector3(0.10742149, -0.125, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("CSGBox3D3:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.13333331, 0.16666667, 0.70000005, 1.0333333),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector3(-0.01319335, -0.125, 0.61616063), Vector3(-0.01319335, 0.006720662, 0.61616063), Vector3(-0.01319335, 0.006720662, 0.61616063), Vector3(-0.01319335, -0.57524043, 0.61616063), Vector3(-0.01319335, -0.125, 0.61616063)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("CSGBox3D:rotation")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.16666667, 0.3333333, 0.9, 1.0333333),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(0, 0, 0), Vector3(-0.81313145, 0, 0), Vector3(-0.81313145, 0, 0), Vector3(0, 0, 0)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("CSGBox3D2:rotation")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 0.16666667, 0.3333333, 0.9, 1.0333333),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector3(0, -3.1415925, 0), Vector3(0, -3.1415925, 0), Vector3(0.81313145, -3.1415925, 1.5961218e-07), Vector3(0.81313145, -3.1415925, 1.5961218e-07), Vector3(0, -3.1415925, 0)]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("CSGBox3D3:rotation")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0, 0.16666667, 0.43333334, 1.0333333),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Vector3(0, 1.5715818, 0), Vector3(0, 1.5715818, 0), Vector3(0, 1.5715818, 0), Vector3(0, 1.5715818, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_2b4fw"]
+resource_name = "shoot"
+length = 0.6
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CSGBox3D:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector3(-0.1282381, -0.125, 0), Vector3(-0.1282381, -0.125, 0.105636954), Vector3(-0.1282381, -0.125, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("CSGBox3D2:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector3(0.10742149, -0.125, 0), Vector3(0.10742149, -0.125, 0.105636954), Vector3(0.10742149, -0.125, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("CSGBox3D:rotation")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.10000001, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(0.12716469, 0, 0), Vector3(0, 0, 0)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("CSGBox3D2:rotation")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.10000001, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector3(0, -3.1415925, 0), Vector3(-0.12716469, -3.1415925, -1.930551e-08), Vector3(0, -3.1415925, 0)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("CSGBox3D3:position")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 0.10000001, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector3(-0.01319335, -0.125, 0.61616063), Vector3(-0.01319335, -0.20544566, 0.71318704), Vector3(-0.01319335, -0.125, 0.61616063)]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("CSGBox3D3:rotation")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0, 0.10000001, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector3(0, 1.5715818, 0), Vector3(-9.589332e-05, 1.571576, 0.12238246), Vector3(0, 1.5715818, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_h0nc0"]
+resource_name = "enter"
+length = 0.4
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CSGBox3D:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(1.1920929e-07, 0.20000005, 0.33333337),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector3(-0.1282381, -0.9538832, 0.023456216), Vector3(-0.1282381, -0.58230424, 0.0030266084), Vector3(-0.1282381, -0.125, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("CSGBox3D2:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(1.1920929e-07, 0.20000005, 0.33333337),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector3(0.10742149, -0.9538832, 0.023456216), Vector3(0.10742149, -0.58230424, 0.0030266084), Vector3(0.10742149, -0.125, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("CSGBox3D3:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(1.1920929e-07, 0.33333337),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(-0.01319335, -0.57524043, 0.61616063), Vector3(-0.01319335, -0.125, 0.61616063)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("CSGBox3D:rotation")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0.20000005, 0.33333337),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(-0.81313145, 0, 0), Vector3(0, 0, 0)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("CSGBox3D2:rotation")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0.20000005, 0.33333337),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(0.81313145, -3.1415925, 1.5961218e-07), Vector3(0, -3.1415925, 0)]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("CSGBox3D3:rotation")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0.33333337),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 1.5715818, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_3vmjn"]
+_data = {
+&"RESET": SubResource("Animation_ik0wd"),
+&"equip": SubResource("Animation_h0nc0"),
+&"reload": SubResource("Animation_3vmjn"),
+&"shoot": SubResource("Animation_2b4fw")
+}
+
+[node name="Weapon2" type="Node3D" node_paths=PackedStringArray("animations", "audio")]
 script = ExtResource("1_h0nc0")
+animations = NodePath("AnimationPlayer")
+audio = NodePath("AudioStreamPlayer3D")
 metadata/_custom_type_script = "uid://dy4ll702xan8b"
 
 [node name="CSGBox3D" type="CSGBox3D" parent="."]
@@ -15,6 +331,20 @@ size = Vector3(0.22705078, 0.25, 1)
 material = SubResource("StandardMaterial3D_2b4fw")
 
 [node name="CSGBox3D2" type="CSGBox3D" parent="."]
-transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0.10742149, -0.125, 0)
+transform = Transform3D(-1, 0, -1.509958e-07, 0, 1, 0, 1.509958e-07, 0, -1, 0.10742149, -0.125, 0)
 size = Vector3(0.22705078, 0.25, 1)
 material = SubResource("StandardMaterial3D_2b4fw")
+
+[node name="CSGBox3D3" type="CSGBox3D" parent="."]
+transform = Transform3D(-0.0007857962, 0, 0.5413353, 0, 1.0000001, 0, -1.0003593, 0, -0.0004252264, -0.01319335, -0.125, 0.61616063)
+size = Vector3(0.22705078, 0.25, 0.84069824)
+material = SubResource("StandardMaterial3D_h0nc0")
+
+[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.49259734, 0)
+volume_db = -15.0
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_3vmjn")
+}

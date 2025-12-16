@@ -12,6 +12,7 @@ func equip():
 		animations.play("equip")
 
 func unequip():
+	audio.stop()
 	hide()
 
 

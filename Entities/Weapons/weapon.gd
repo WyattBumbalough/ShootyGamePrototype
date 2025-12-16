@@ -16,7 +16,7 @@ func equip():
 
 func unequip():
 	hide()
-
+	
 
 func shoot():
 	if !can_shoot:

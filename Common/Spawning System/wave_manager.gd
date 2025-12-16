@@ -8,6 +8,7 @@ class_name WaveManager
 
 @onready var rand = RandomNumberGenerator.new()
 @onready var current_enemies: int = 0
+@onready var epic: AudioStreamPlayer = $"../AudioStreamPlayer"
 
 var dead_enemies: int = 0
 var spawn_pool: Array[EnemyResource] = []
@@ -87,4 +88,5 @@ func _on_enemy_killed():
 
 func _input(_event: InputEvent) -> void:
 	if Input.is_action_just_pressed("option") and not waves.is_empty():
+		epic.play()
 		load_wave()
