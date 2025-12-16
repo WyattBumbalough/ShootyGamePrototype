@@ -43,8 +43,8 @@ func _unhandled_input(event: InputEvent) -> void:
 		else:
 			Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 	
-	if Input.is_action_just_pressed("shoot"):
-		raycast()
+	#if Input.is_action_just_pressed("shoot"):
+		#raycast()
 
 
 func _process(_delta: float) -> void:

@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=3 uid="uid://dxpf6y10dmc1q"]
+[gd_scene load_steps=22 format=3 uid="uid://dxpf6y10dmc1q"]
 
 [ext_resource type="Script" uid="uid://cs730ueljjghv" path="res://Entities/Player/Player.gd" id="1_xhfnw"]
 [ext_resource type="Script" uid="uid://clxmkhw2qrcfq" path="res://Entities/Weapons/WeaponManager/weapon_manager.gd" id="2_jynvv"]
@@ -7,6 +7,7 @@
 [ext_resource type="Script" uid="uid://b51yfegyf271a" path="res://Entities/Player/States/Idle.gd" id="3_vweq0"]
 [ext_resource type="Script" uid="uid://dafeehxt4nr28" path="res://Entities/Player/States/Moving.gd" id="4_1des2"]
 [ext_resource type="PackedScene" uid="uid://c2q2umuw4re60" path="res://Entities/Weapons/weapon_2.tscn" id="4_061yh"]
+[ext_resource type="Script" uid="uid://cfi7hxnyw32do" path="res://Entities/Weapons/test_weapon.gd" id="4_lmeus"]
 [ext_resource type="Script" uid="uid://y0he0fi2dn52" path="res://Entities/Player/States/Falling.gd" id="5_an6q6"]
 [ext_resource type="Script" uid="uid://c5lf3ml8immra" path="res://Entities/Player/States/Jump.gd" id="6_t38ms"]
 [ext_resource type="Texture2D" uid="uid://cb4ydn7v8canl" path="res://Assets/Textures/crosshair001.png" id="7_hj1c0"]
@@ -68,6 +69,7 @@ all_weapons = [NodePath("Weapon"), NodePath("Weapon2")]
 [node name="Weapon" parent="Head/Eyes/WeaponManager" instance=ExtResource("3_lmeus")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.3208211, -0.3224702, -0.83970886)
 visible = false
+script = ExtResource("4_lmeus")
 
 [node name="Weapon2" parent="Head/Eyes/WeaponManager" instance=ExtResource("4_061yh")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.31308162, -0.28720427, -0.9235222)

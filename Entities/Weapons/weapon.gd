@@ -26,3 +26,4 @@ func shoot():
 	can_shoot = false
 	await animations.animation_finished
 	can_shoot = true
+	

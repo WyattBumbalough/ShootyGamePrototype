@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=4 uid="uid://rfbus4ve3avp"]
+[gd_scene load_steps=8 format=4 uid="uid://rfbus4ve3avp"]
 
 [ext_resource type="Script" uid="uid://dy4ll702xan8b" path="res://Entities/Weapons/weapon.gd" id="1_cyk6p"]
 
@@ -12,6 +12,33 @@ _surfaces = [{
 "vertex_count": 84,
 "vertex_data": PackedByteArray("AACCvQAAfL0AAGy+AABEvQAAfL3xNJU9AACCPQAAfL0AAGy+AACCvQAAfL0AAGy+AABEvQAAfL142lI+AABEvQAAfL3xNJU9AACCvQAAfL0AAGy+AACCvQAAfL0AAGw+AABEvQAAfL142lI+AACCvQAAfL0AAGw+AABEPQAAfL142lI+AABEvQAAfL142lI+AACCvQAAfL0AAGy+AACCvQBA0D0AAGy+AACCvQAAfL0AAGw+AACCvQAAfL0AAGy+AACCPQAAfL0AAGy+AACCvQBA0D0AAGy+AACCvQAAfL0AAGw+AACCvQBA0D0AAGy+AACCvQBA0D0AAGw+AACCvQBA0D0AAGy+AACCPQBA0D0AAGw+AACCvQBA0D0AAGw+AACCvQAAfL0AAGw+AACCvQBA0D0AAGw+AACCPQBA0D0AAGw+AACCPQAAfL0AAGy+AABEvQAAfL3xNJU9AABEPQAAfL3xNJU9AACCvQAAfL0AAGw+AACCPQAAfL0AAGw+AABEPQAAfL142lI+AACCPQAAfL0AAGy+AABEPQAAfL3xNJU9AACCPQAAfL0AAGw+AACCPQAAfL0AAGw+AABEPQAAfL3xNJU9AABEPQAAfL142lI+AACCvQBA0D0AAGy+AACCPQAAfL0AAGy+AACCPQBA0D0AAGy+AACCvQBA0D0AAGy+AACCPQBA0D0AAGy+AACCPQBA0D0AAGw+AACCPQAAfL0AAGy+AACCPQBA0D0AAGw+AACCPQBA0D0AAGy+AACCvQAAfL0AAGw+AACCPQBA0D0AAGw+AACCPQAAfL0AAGw+AACCPQAAfL0AAGy+AACCPQAAfL0AAGw+AACCPQBA0D0AAGw+AABEvQDYY77vNJU9AABEvQAAfL142lI+AABEvQDYY7542lI+AABEvQDYY77vNJU9AABEvQAAfL3xNJU9AABEvQAAfL142lI+AABEvQDYY77vNJU9AABEPQDYY77vNJU9AABEvQAAfL3xNJU9AABEvQDYY77vNJU9AABEvQDYY7542lI+AABEPQDYY7542lI+AABEvQDYY7542lI+AABEvQAAfL142lI+AABEPQAAfL142lI+AABEvQDYY77vNJU9AABEPQDYY7542lI+AABEPQDYY77vNJU9AABEvQDYY7542lI+AABEPQAAfL142lI+AABEPQDYY7542lI+AABEPQDYY77vNJU9AABEPQAAfL3xNJU9AABEvQAAfL3xNJU9AABEPQDYY77vNJU9AABEPQDYY7542lI+AABEPQAAfL3xNJU9AABEPQDYY7542lI+AABEPQAAfL142lI+AABEPQAAfL3xNJU9/38AAP//AAD/fwAA//8AAP9/AAD//wAA/38AAP//AAD/fwAA//8AAP9/AAD//wAA/38AAP//AAD/fwAA//8AAP9/AAD//wAA/38AAP//AAD/fwAA//8AAP9/AAD//wAAAAD/f/9//n8AAP9//3/+fwAA/3//f/5//////wAA/z//////AAD/P/////8AAP8/AAD/f/9//n8AAP9//3/+fwAA/3//f/5//3//////AAD/f/////8AAP9//////wAA/3//fwAA/z//f/9/AAD/P/9//38AAP8//38AAP//AAD/fwAA//8AAP9/AAD//wAA/38AAP//AAD/fwAA//8AAP9/AAD//wAA/38AAP//AAD/fwAA//8AAP9/AAD//wAA/38AAP//AAD/fwAA//8AAP9/AAD//wAA/////wAA/z//////AAD/P/////8AAP8//3//////AAD/f/////8AAP9//////wAA////f/9//n////9//3/+f////3//f/5//3//fwAA/z//f/9/AAD/P/9//38AAP8/////f/9//n////9//3/+f////3//f/5/AAD/f///AAAAAP9///8AAAAA/3///wAAAAD/f///AAAAAP9///8AAAAA/3///wAA/v////9/AAD+/////38AAP7/////fwAA/38AAAAA/z//fwAAAAD/P/9/AAAAAP8//3//f/9/AAD/f/9//38AAP9//3//fwAA/38AAAAA/z//fwAAAAD/P/9/AAAAAP8//3//f/9/AAD/f/9//38AAP9//3//fwAA/v////9/AAD+/////38AAP7/////fwAA////f///AAD///9///8AAP///3///wAA////f///AAD///9///8AAP///3///wAA")
 }]
+
+[sub_resource type="Animation" id="Animation_udx7b"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Mesh:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Mesh:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0, 0)]
+}
 
 [sub_resource type="Animation" id="Animation_4v7aq"]
 resource_name = "equip"
@@ -39,33 +66,6 @@ tracks/1/keys = {
 "transitions": PackedFloat32Array(1, 1, -2, 2),
 "update": 0,
 "values": [Vector3(-1.0670071, 0, 0), Vector3(-1.0670071, 0, 0), Vector3(0.061086524, 0, 0), Vector3(0, 0, 0)]
-}
-
-[sub_resource type="Animation" id="Animation_udx7b"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Mesh:position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector3(0, 0, 0)]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("Mesh:rotation")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector3(0, 0, 0)]
 }
 
 [sub_resource type="Animation" id="Animation_cyk6p"]
@@ -96,10 +96,39 @@ tracks/1/keys = {
 "values": [Vector3(0, 0, 0), Vector3(0, 0, 0), Vector3(0.2457598, 0, 0), Vector3(-0.04118977, 0, 0), Vector3(0, 0, 0)]
 }
 
+[sub_resource type="Animation" id="Animation_yk4kt"]
+resource_name = "reload"
+length = 1.16
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Mesh:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.36666667, 0.6666667, 0.8666667, 1.1333333),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(0.15866542, 0.19295639, 0), Vector3(0.15866542, 0.21947993, 0), Vector3(0.15866542, 0.31183016, 0), Vector3(0, 0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Mesh:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.36666667, 0.6666667, 0.8666667, 1.1333333),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(0.28523916, 0, 0), Vector3(0.31175074, 0, 0), Vector3(0.31871456, 0, 0), Vector3(0, 0, 0)]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_yk4kt"]
 _data = {
 &"RESET": SubResource("Animation_udx7b"),
 &"equip": SubResource("Animation_4v7aq"),
+&"reload": SubResource("Animation_yk4kt"),
 &"shoot": SubResource("Animation_cyk6p")
 }
 
