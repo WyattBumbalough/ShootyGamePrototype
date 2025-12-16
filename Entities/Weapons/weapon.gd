@@ -2,6 +2,7 @@ extends Node3D
 class_name Weapon
 
 @export var animations: AnimationPlayer
+@export var audio: AudioStreamPlayer3D
 
 var can_shoot: bool = true
 

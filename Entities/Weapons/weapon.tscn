@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=4 uid="uid://rfbus4ve3avp"]
+[gd_scene load_steps=9 format=4 uid="uid://rfbus4ve3avp"]
 
 [ext_resource type="Script" uid="uid://dy4ll702xan8b" path="res://Entities/Weapons/weapon.gd" id="1_cyk6p"]
 
@@ -68,6 +68,34 @@ tracks/1/keys = {
 "values": [Vector3(-1.0670071, 0, 0), Vector3(-1.0670071, 0, 0), Vector3(0.061086524, 0, 0), Vector3(0, 0, 0)]
 }
 
+[sub_resource type="Animation" id="Animation_yk4kt"]
+resource_name = "reload"
+length = 0.8
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Mesh:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.26666668, 0.5, 0.6333333, 0.8),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(0.15866542, 0.19295639, 0), Vector3(0.15866542, 0.21947993, 0), Vector3(0.15866542, 0.31183016, 0), Vector3(0, 0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Mesh:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.26666668, 0.5, 0.6333333, 0.8),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(0.28523916, 0, 0), Vector3(0.31175074, 0, 0), Vector3(0.31871456, 0, 0), Vector3(0, 0, 0)]
+}
+
 [sub_resource type="Animation" id="Animation_cyk6p"]
 resource_name = "shoot"
 length = 0.15
@@ -96,34 +124,6 @@ tracks/1/keys = {
 "values": [Vector3(0, 0, 0), Vector3(0, 0, 0), Vector3(0.2457598, 0, 0), Vector3(-0.04118977, 0, 0), Vector3(0, 0, 0)]
 }
 
-[sub_resource type="Animation" id="Animation_yk4kt"]
-resource_name = "reload"
-length = 1.16
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Mesh:position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.36666667, 0.6666667, 0.8666667, 1.1333333),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
-"update": 0,
-"values": [Vector3(0, 0, 0), Vector3(0.15866542, 0.19295639, 0), Vector3(0.15866542, 0.21947993, 0), Vector3(0.15866542, 0.31183016, 0), Vector3(0, 0, 0)]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("Mesh:rotation")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.36666667, 0.6666667, 0.8666667, 1.1333333),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
-"update": 0,
-"values": [Vector3(0, 0, 0), Vector3(0.28523916, 0, 0), Vector3(0.31175074, 0, 0), Vector3(0.31871456, 0, 0), Vector3(0, 0, 0)]
-}
-
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_yk4kt"]
 _data = {
 &"RESET": SubResource("Animation_udx7b"),
@@ -132,9 +132,12 @@ _data = {
 &"shoot": SubResource("Animation_cyk6p")
 }
 
-[node name="Weapon" type="Node3D" node_paths=PackedStringArray("animations")]
+[sub_resource type="AudioStreamMP3" id="AudioStreamMP3_cyk6p"]
+
+[node name="Weapon" type="Node3D" node_paths=PackedStringArray("animations", "audio")]
 script = ExtResource("1_cyk6p")
 animations = NodePath("AnimationPlayer")
+audio = NodePath("AudioStreamPlayer3D")
 
 [node name="CSGCombiner3D" type="CSGCombiner3D" parent="."]
 visible = false
@@ -154,3 +157,8 @@ mesh = SubResource("ArrayMesh_cyk6p")
 libraries = {
 &"": SubResource("AnimationLibrary_yk4kt")
 }
+
+[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="."]
+stream = SubResource("AudioStreamMP3_cyk6p")
+bus = &"SFX"
+playback_type = 1
