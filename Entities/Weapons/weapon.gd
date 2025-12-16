@@ -1,6 +1,12 @@
 extends Node3D
 class_name Weapon
 
+@export_category("Parameters")
+@export var weapon_name: String
+@export var damage: float = 10.0
+@export var gunshot_sound: AudioStream
+
+@export_category("Nodes")
 @export var animations: AnimationPlayer
 @export var audio: AudioStreamPlayer3D
 

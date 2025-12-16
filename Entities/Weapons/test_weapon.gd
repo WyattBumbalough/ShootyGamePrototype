@@ -6,10 +6,9 @@ func _ready() -> void:
 	hide()
 
 func equip():
-	show()
+	super()
 	mag = 0
-	if animations:
-		animations.play("equip")
+
 
 func unequip():
 	audio.stop()
