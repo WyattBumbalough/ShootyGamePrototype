@@ -1,4 +1,4 @@
-extends State
+extends PlayerState
 
 #--Export--
 @export var jump_force: float

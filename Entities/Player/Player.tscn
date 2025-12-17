@@ -101,6 +101,8 @@ jump_state = NodePath("../Jump")
 falling_state = NodePath("../Falling")
 moving_state = NodePath("../Moving")
 move_speed = 0.0
+accel = null
+friction = null
 metadata/_custom_type_script = "uid://wp5qe084fq8l"
 
 [node name="Moving" type="Node" parent="PlayerStateMachine" node_paths=PackedStringArray("idle_state", "jump_state", "falling_state", "moving_state")]
@@ -109,7 +111,9 @@ idle_state = NodePath("../Idle")
 jump_state = NodePath("../Jump")
 falling_state = NodePath("../Falling")
 moving_state = NodePath(".")
+move_speed = null
 accel = 0.25
+friction = null
 
 [node name="Falling" type="Node" parent="PlayerStateMachine" node_paths=PackedStringArray("idle_state", "jump_state", "falling_state", "moving_state")]
 script = ExtResource("5_an6q6")
@@ -117,6 +121,8 @@ idle_state = NodePath("../Idle")
 jump_state = NodePath("../Jump")
 falling_state = NodePath(".")
 moving_state = NodePath("../Moving")
+move_speed = null
+accel = null
 friction = 0.25
 
 [node name="Jump" type="Node" parent="PlayerStateMachine" node_paths=PackedStringArray("idle_state", "jump_state", "falling_state", "moving_state")]
@@ -126,6 +132,9 @@ idle_state = NodePath("../Idle")
 jump_state = NodePath(".")
 falling_state = NodePath("../Falling")
 moving_state = NodePath("../Moving")
+move_speed = null
+accel = null
+friction = null
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 

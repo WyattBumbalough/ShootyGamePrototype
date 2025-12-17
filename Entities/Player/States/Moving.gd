@@ -1,4 +1,6 @@
-extends State
+extends PlayerState
+## Player Moving State
+
 
 func handle_physics(_delta) -> State:
 		Char.handle_movement(move_speed, accel, friction)
@@ -6,6 +8,7 @@ func handle_physics(_delta) -> State:
 		if Char.velocity.y <= 0 and !Char.is_on_floor():
 			return falling_state
 		return null
+
 
 func handle_input(_event: InputEvent) -> State:
 		if Input.is_action_just_pressed("jump"):

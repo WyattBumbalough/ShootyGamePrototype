@@ -1,4 +1,4 @@
-extends State
+extends PlayerState
 
 func handle_physics(_delta) -> State:
 		Char.handle_movement(move_speed, accel, friction)

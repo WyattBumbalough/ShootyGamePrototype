@@ -1,4 +1,4 @@
-extends State
+extends PlayerState
 
 var can_jump: bool = true
 var coyote: float = 0.0
