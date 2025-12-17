@@ -30,11 +30,12 @@ height = 1.5
 radius = 0.6
 height = 1.5
 
-[node name="EnemySmall" type="CharacterBody3D" node_paths=PackedStringArray("health_component", "hitbox_component", "mesh", "animations", "nav_agent")]
+[node name="EnemySmall" type="CharacterBody3D" node_paths=PackedStringArray("health_component", "hitbox_component", "state_machine", "mesh", "animations", "nav_agent")]
 script = ExtResource("1_afgpb")
 move_speed = 5.0
 health_component = NodePath("HealthComponent")
 hitbox_component = NodePath("HitboxComponent")
+state_machine = NodePath("StateMachine")
 mesh = NodePath("Mesh")
 animations = NodePath("AnimationPlayer")
 nav_agent = NodePath("NavigationAgent3D")
