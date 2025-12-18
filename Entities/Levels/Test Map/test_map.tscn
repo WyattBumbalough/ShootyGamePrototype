@@ -1,4 +1,4 @@
-[gd_scene load_steps=28 format=3 uid="uid://dr270p12kgbng"]
+[gd_scene load_steps=27 format=3 uid="uid://dr270p12kgbng"]
 
 [ext_resource type="PackedScene" uid="uid://dxpf6y10dmc1q" path="res://Entities/Player/Player.tscn" id="1_mc158"]
 [ext_resource type="PackedScene" uid="uid://b58n3ea82dc54" path="res://Entities/Enemies/Small/enemy_small.tscn" id="2_07bv8"]
@@ -8,11 +8,6 @@
 [ext_resource type="PackedScene" uid="uid://iwtqaue6ffcv" path="res://Common/Spawning System/Spawner/spawner.tscn" id="3_aebi7"]
 [ext_resource type="Texture2D" uid="uid://elkn1evskl0w" path="res://Assets/Textures/Grids/orange/texture_10.png" id="5_5brj3"]
 [ext_resource type="Texture2D" uid="uid://bhvy2tetdwlxx" path="res://Assets/Textures/Grids/dark/texture_03.png" id="5_u68xo"]
-
-[sub_resource type="Resource" id="Resource_u68xo"]
-script = ExtResource("3_6s2aa")
-light_enemies = 100
-metadata/_custom_type_script = "uid://cgc1ap270d0tg"
 
 [sub_resource type="Resource" id="Resource_ayqeu"]
 script = ExtResource("3_6s2aa")
@@ -102,7 +97,7 @@ volumetric_fog_sky_affect = 0.0
 
 [node name="WaveManager" type="Node" parent="."]
 script = ExtResource("2_mrbiv")
-waves = Array[ExtResource("3_6s2aa")]([SubResource("Resource_u68xo"), SubResource("Resource_ayqeu"), SubResource("Resource_5brj3")])
+waves = Array[ExtResource("3_6s2aa")]([SubResource("Resource_ayqeu"), SubResource("Resource_5brj3")])
 
 [node name="Spawner" parent="WaveManager" instance=ExtResource("3_aebi7")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 39.168213, 0, 7.3324547)

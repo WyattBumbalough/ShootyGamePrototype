@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=3 uid="uid://dxpf6y10dmc1q"]
+[gd_scene load_steps=24 format=3 uid="uid://dxpf6y10dmc1q"]
 
 [ext_resource type="Script" uid="uid://cs730ueljjghv" path="res://Entities/Player/Player.gd" id="1_xhfnw"]
 [ext_resource type="Script" uid="uid://clxmkhw2qrcfq" path="res://Entities/Weapons/WeaponManager/weapon_manager.gd" id="2_jynvv"]
@@ -11,6 +11,7 @@
 [ext_resource type="Script" uid="uid://c5lf3ml8immra" path="res://Entities/Player/States/Jump.gd" id="6_t38ms"]
 [ext_resource type="Texture2D" uid="uid://cb4ydn7v8canl" path="res://Assets/Textures/crosshair001.png" id="7_hj1c0"]
 [ext_resource type="PackedScene" uid="uid://cgaokdy727hb0" path="res://Entities/Player/navpoint.tscn" id="11_jynvv"]
+[ext_resource type="Texture2D" uid="uid://diloe1tpvxvsl" path="res://Assets/Icons/circle.png" id="11_lmeus"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_t38ms"]
 albedo_color = Color(1, 0.47058824, 0.20784314, 1)
@@ -44,6 +45,12 @@ font_size = 32
 outline_size = 1
 outline_color = Color(0, 0, 0, 1)
 shadow_color = Color(0, 0, 0, 0.7019608)
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_jynvv"]
+content_margin_bottom = 150.0
+
+[sub_resource type="LabelSettings" id="LabelSettings_lmeus"]
+font_size = 25
 
 [node name="Player" type="CharacterBody3D"]
 script = ExtResource("1_xhfnw")
@@ -138,7 +145,7 @@ friction = null
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
-[node name="CenterContainer" type="CenterContainer" parent="CanvasLayer"]
+[node name="Reticle Container" type="CenterContainer" parent="CanvasLayer"]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -146,7 +153,7 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 
-[node name="Reticle" type="TextureRect" parent="CanvasLayer/CenterContainer"]
+[node name="Reticle" type="TextureRect" parent="CanvasLayer/Reticle Container"]
 layout_mode = 2
 texture = ExtResource("7_hj1c0")
 
@@ -199,6 +206,27 @@ grow_horizontal = 0
 theme_override_styles/normal = SubResource("StyleBoxEmpty_x44r4")
 text = "Walking"
 label_settings = SubResource("LabelSettings_761t5")
+
+[node name="StartGameContainer" type="CenterContainer" parent="CanvasLayer"]
+unique_name_in_owner = true
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="Label" type="Label" parent="CanvasLayer/StartGameContainer"]
+layout_mode = 2
+theme_override_styles/normal = SubResource("StyleBoxEmpty_jynvv")
+text = "Hold [E] to start."
+label_settings = SubResource("LabelSettings_lmeus")
+
+[node name="TextureProgressBar" type="TextureProgressBar" parent="CanvasLayer/StartGameContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+fill_mode = 4
+texture_progress = ExtResource("11_lmeus")
 
 [node name="NavPointsInner" type="Node3D" parent="."]
 unique_name_in_owner = true

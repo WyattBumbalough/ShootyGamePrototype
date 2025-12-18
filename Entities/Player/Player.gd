@@ -1,14 +1,18 @@
 extends CharacterBody3D
 class_name Player
 
-# --References--
+# --References----------------------------------------------------------|
 @onready var player_state_machine: StateMachine = %PlayerStateMachine
 @onready var head: Node3D = $Head
 @onready var eyes: Camera3D = $Head/Eyes
-@onready var enemy_count_label: Label = %EnemyCountLabel
 @onready var nav_points: Node3D = %NavPointsInner
 
-#--References End--
+# UI References ---------|
+@onready var start_game_container: CenterContainer = %StartGameContainer
+@onready var texture_progress_bar: TextureProgressBar = %TextureProgressBar
+@onready var enemy_count_label: Label = %EnemyCountLabel
+
+#--References End------------------------------------------------------|
 
 #--Variables--
 var lock_mouse: bool
@@ -48,8 +52,14 @@ func _unhandled_input(event: InputEvent) -> void:
 
 
 func _process(_delta: float) -> void:
-	enemy_count_label.text = "Enemies remaining: " + str(Global.wave_manager.current_enemies)
-
+	enemy_count_label.text = "Enemies remaining: " + str(GameManager.wave_manager.current_enemies)
+	if Input.is_action_pressed("action") and not GameManager.game_started:
+		texture_progress_bar.value += 1.0
+		if texture_progress_bar.value >= 100.0:
+			GameManager.start_game()
+			start_game_container.hide()
+	elif Input.is_action_just_released("action") and not GameManager.game_started:
+		texture_progress_bar.value = 0.0
 
 func _physics_process(delta: float) -> void:
 	#Display the current state.

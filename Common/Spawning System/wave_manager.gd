@@ -4,6 +4,7 @@ class_name WaveManager
 @export_group("Wave settings")
 @export var max_spawn_amount: int = 10 ## Maximum amount of entities that can be spawned at the same time.
 @export var spawn_delay: float = 0.25 ## Time between each entity spawn.
+@export var wave_intermission: float = 15.0 ## Time between waves.
 @export var waves: Array[WaveResource] = []
 
 @onready var rand = RandomNumberGenerator.new()
@@ -14,7 +15,8 @@ var spawn_pool: Array[EnemyResource] = []
 
 
 func _ready() -> void:
-	Global.wave_manager = self
+	#Global.wave_manager = self
+	GameManager.wave_manager = self
 	GameManager.enemy_killed.connect(_on_enemy_killed)
 	#load_wave()
 
