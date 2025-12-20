@@ -16,23 +16,33 @@ func initialize(Char: CharacterBody3D):
 	for i in get_children():
 		if i is State:
 			i.Char = Char
+			i.state_machine = self
 
 		change_state(starting_state)
 
-func change_state(new_state: State):
-		if current_state != null:
-			current_state.exit()
 
-		previous_state = current_state
-		current_state = new_state
-		current_state.enter(previous_state)
+func change_state(new_state: State):
+	if current_state != null:
+		current_state.exit()
+
+	previous_state = current_state
+	current_state = new_state
+	current_state.enter(previous_state)
+
 
 func handle_physics(delta):
-		var new_state = current_state.handle_physics(delta)
-		if new_state != null:
-			change_state(new_state)
+	var new_state = current_state.handle_physics(delta)
+	if new_state != null:
+		change_state(new_state)
+
+
+func handle_process(delta):
+	var new_state = current_state.handle_process(delta)
+	if new_state:
+		change_state(new_state)
+
 
 func handle_input(event: InputEvent):
-		var new_state = current_state.handle_input(event)
-		if new_state != null:
-			change_state(new_state)
+	var new_state = current_state.handle_input(event)
+	if new_state != null:
+		change_state(new_state)

@@ -1,10 +1,6 @@
 extends Node
 class_name State
 
-#--Variables--
-#var Char: Player
-#--Varibles End--
-
 #--Exports--
 @export_category("Movement Tweaking") #Exports movement variables
 @export var move_speed: float = 7
@@ -12,6 +8,7 @@ class_name State
 @export var friction: float = 0.1
 #--Exports End--
 
+var state_machine: StateMachine
 
 func enter(_previous_state: State):
 		pass
@@ -23,6 +20,10 @@ func exit():
 
 func handle_physics(_delta) -> State:
 		return null
+
+
+func handle_process(_delta) -> State:
+	return null
 
 
 func handle_input(_event: InputEvent) -> State:

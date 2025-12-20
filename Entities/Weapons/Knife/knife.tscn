@@ -1,0 +1,25 @@
+[gd_scene load_steps=3 format=3 uid="uid://btdj7ywce5o06"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_hdf0l"]
+albedo_color = Color(0.32656252, 0.32656252, 0.32656252, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_sxc4o"]
+metallic = 0.68
+roughness = 0.56
+
+[node name="knife" type="CSGCombiner3D"]
+
+[node name="CSGBox3D" type="CSGBox3D" parent="."]
+size = Vector3(0.099609375, 0.16748047, 0.25)
+material = SubResource("StandardMaterial3D_hdf0l")
+
+[node name="CSGBox3D2" type="CSGBox3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.13720931, 0)
+size = Vector3(0.07446289, 0.16748047, 0.11035156)
+material = SubResource("StandardMaterial3D_hdf0l")
+
+[node name="CSGPolygon3D" type="CSGPolygon3D" parent="."]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 0.027212143, -0.109632835, -0.103572965)
+polygon = PackedVector2Array(-0.18125272, 0.17741688, -0.18508887, 0.43059543, -0.10644996, 0.54375863, -0.025893204, 0.44210356, -0.027811162, 0.17166278)
+depth = 0.05
+material = SubResource("StandardMaterial3D_sxc4o")

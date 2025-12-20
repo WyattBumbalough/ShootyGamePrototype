@@ -1,9 +1,13 @@
-[gd_scene load_steps=11 format=3 uid="uid://b58n3ea82dc54"]
+[gd_scene load_steps=23 format=4 uid="uid://b58n3ea82dc54"]
 
 [ext_resource type="Script" uid="uid://b5aers873e8rj" path="res://Entities/Enemies/enemy.gd" id="1_afgpb"]
 [ext_resource type="Script" uid="uid://c0lh3xudunkd8" path="res://Common/Components/health_component.gd" id="2_mipfx"]
 [ext_resource type="Script" uid="uid://bnh6tgipmolts" path="res://Common/Components/hitbox_component.gd" id="3_1ei65"]
 [ext_resource type="Script" uid="uid://cmek1dcaubhxl" path="res://Common/State Machine/State_Machine.gd" id="4_mipfx"]
+[ext_resource type="Script" uid="uid://chok1n0ylofjl" path="res://Entities/Enemies/Small/States/enemy_small_idle.gd" id="5_1ei65"]
+[ext_resource type="Script" uid="uid://ktn5hhlkhiya" path="res://Entities/Enemies/Small/States/enemy_small_moving.gd" id="6_qtmrm"]
+[ext_resource type="Script" uid="uid://c3gqa1clvbac3" path="res://Entities/Enemies/Small/States/enemy_small_attack.gd" id="7_x7bwl"]
+[ext_resource type="Script" uid="uid://dyjicjvku038e" path="res://Common/Components/hurtbox_component.gd" id="8_gbnqi"]
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_wbf3x"]
 height = 1.5
@@ -26,17 +30,174 @@ radial_segments = 10
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_6rqwt"]
 height = 1.5
 
+[sub_resource type="Animation" id="Animation_cmykg"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Knife:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0.6144146, 0.6173438, -0.10717255)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Mesh:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0.75, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Knife:rotation")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(-1.3086876, -0.16656783, 0.30829793)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Knife/HurtboxComponent/CollisionShape3D:disabled")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="Animation" id="Animation_gbnqi"]
+resource_name = "attack"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Mesh:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.3, 0.3674616, 0.5333333),
+"transitions": PackedFloat32Array(0.5, 2, 2, 2),
+"update": 0,
+"values": [Vector3(0, 0.75, 0), Vector3(0, 0.75, 0.75), Vector3(0, 0.75, 0.75), Vector3(0, 0.75, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Knife:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.36666667, 0.5333333, 0.6666666),
+"transitions": PackedFloat32Array(0.5, 2, 1, 1),
+"update": 0,
+"values": [Vector3(0.6144146, 0.6173438, -0.10717255), Vector3(0.64053243, 0.62981474, 0.8677707), Vector3(-0.107233405, 0.62981474, -0.7405869), Vector3(0.6144146, 0.6173438, -0.10717255)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Knife:rotation")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.36666667, 0.49844816, 0.76666665),
+"transitions": PackedFloat32Array(0.5, 2, 1, 1),
+"update": 0,
+"values": [Vector3(-1.3086876, -0.16656783, 0.30829793), Vector3(-1.3086878, -1.077333, 0.30829793), Vector3(-0.29699415, -1.4837666, 1.502897), Vector3(-1.3086876, -0.16656783, 0.30829793)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Knife/HurtboxComponent/CollisionShape3D:disabled")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.43333334, 0.5573588),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [true, false, true]
+}
+
+[sub_resource type="Animation" id="Animation_w7pc1"]
+resource_name = "run"
+length = 0.8
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Knife:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.20000002, 0.40000004, 0.6),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Vector3(0.6144146, 0.6173438, -0.10717255), Vector3(0.6144146, 0.70345545, 0.22372025), Vector3(0.6144146, 0.6173438, -0.10717255), Vector3(0.6144146, 0.6643137, -0.2585204)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_w6c2i"]
+_data = {
+&"RESET": SubResource("Animation_cmykg"),
+&"attack": SubResource("Animation_gbnqi"),
+&"run": SubResource("Animation_w7pc1")
+}
+
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_08bp1"]
 radius = 0.6
 height = 1.5
 
-[node name="EnemySmall" type="CharacterBody3D" node_paths=PackedStringArray("health_component", "hitbox_component", "state_machine", "mesh", "animations", "nav_agent")]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_hdf0l"]
+albedo_color = Color(0.32656252, 0.32656252, 0.32656252, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_sxc4o"]
+metallic = 0.68
+roughness = 0.56
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_66v6q"]
+_surfaces = [{
+"aabb": AABB(-0.049804688, -0.22094955, -0.125, 0.099609375, 0.30468976, 0.25),
+"attribute_data": PackedByteArray("AACAPwAAAAAAAAAAAAAAAACAOD9BQQE+AACAPwAAAAAAAAAAAAAAAAAAgD8AAIA/AACAPwAAgD/dvE0/0ZA6PwAAAAAAAIA/AACAPwAAAAAAgDg/QUEBPgAAgD8AAIA/AACAPwAAAAAAAAAAAAAAAAAAgD8AAIA/AACAPwAAgD/dvE0/QEFoPt28TT/RkDo/AAAAAAAAAAAAAI8+QUEBPgCAOD9BQQE+AACAPwAAgD8AAAAAAAAAAAAAAAAAAIA/AAAAAAAAgD/dvE0/0ZA6P13VQD7QkDo/AAAAAAAAAAAAAI8+sK9fPwAAjz5BQQE+AACAPwAAgD8AAIA/AAAAAAAAAAAAAAAAAAAAAAAAgD9d1UA+0JA6PwAAAAAAAAAAAACAPwAAgD8AgDg/QUEBPgCAOD+wr18/AACAPwAAgD8AAIA/AAAAAN28TT9AQWg+AACAPwAAgD8AAAAAAAAAAAAAAAAAAIA/AACAPwAAgD8AgDg/sK9fPwAAjz6wr18/AACAPwAAgD8AAAAAAAAAAAAAAAAAAIA/AACAPwAAAAAAAAAAAAAAAN28TT9AQWg+AAAAAAAAAAAAAAAAAACAPwAAjz6wr18/AACAPwAAgD8AAAAAAAAAAAAAAAAAAIA/AAAAAAAAAABd1UA+0JA6P13VQD48QWg+AACAPwAAgD8AAI8+sK9fPwAAAAAAAIA/AAAAAAAAAABd1UA+PEFoPt28TT9AQWg+AACAPwAAgD8AAIA/AAAAAAAAAAAAAAAAAACAPwAAAAAQFTk+AAAAABAVOT4AAIA/AACAPwAAAAAAAAAAAAAAAAAAgD+8ulE/AACAPwAAAAAAAAAAAAAAAAAAgD8AAIA/AACAPwAAAAAQFTk+AACAPwAAgD8AAIA/AACAPwAAgD8AAIA/EBU5PgAAAAAQFTk+AAAAAAAAAAAAAAAAvLpRPwAAgD+8ulE/AACAPwAAgD8AAIA/AAAAABAVOT4AAIA/AAAAAAAAAAAAAAAAAACAPwAAgD8AAIA/AACAPwAAgD8AAAAAEBU5PgAAAAAAAIA/AACAPwAAAAAQFTk+AAAAABAVOT4AAIA/"),
+"format": 34359738391,
+"material": SubResource("StandardMaterial3D_hdf0l"),
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 102,
+"vertex_data": PackedByteArray("AABMvQCAq70AAAC+AABMvQCAq70AAAA+AIAYvQCAq70AAGK9AABMvQCAq70AAAC+AABMvQCAqz0AAAC+AABMvQCAq70AAAA+AABMvQCAqz0AAAC+mq26vACAqz26eZu9AABMvQCAqz0AAAA+AABMvQCAq70AAAC+AIAYvQCAq70AAGK9AABMPQCAq70AAAC+AABMvQCAq70AAAC+AABMPQCAq70AAAC+AABMvQCAqz0AAAC+AABMvQCAqz0AAAC+AezePACAqz26eZu9mq26vACAqz26eZu9AABMvQCAq70AAAA+AIAYvQCAq70AAGI9AIAYvQCAq70AAGK9AABMvQCAq70AAAA+AABMvQCAqz0AAAC+AABMvQCAqz0AAAA+AABMvQCAqz0AAAA+mq26vACAqz26eZu9lq26vACAqz1SlZ89AABMvQCAq70AAAA+AIAYPQCAq70AAGI9AIAYvQCAq70AAGI9AABMvQCAq70AAAA+AABMvQCAqz0AAAA+AABMPQCAqz0AAAA+AABMvQCAqz0AAAA+lq26vACAqz1SlZ89AABMPQCAqz0AAAA+AABMPQCAq70AAAC+AIAYvQCAq70AAGK9AIAYPQCAq70AAGK9AABMvQCAqz0AAAC+AABMPQCAqz0AAAC+AezePACAqz26eZu9AABMvQCAqz0AAAC+AABMPQCAq70AAAC+AABMPQCAqz0AAAC+AABMPQCAq70AAAC+AIAYPQCAq70AAGK9AIAYPQCAq70AAGI9AABMPQCAq70AAAC+AABMPQCAqz0AAAA+AABMPQCAqz0AAAC+AABMPQCAqz0AAAC+AABMPQCAqz0AAAA+AezePACAqz26eZu9AABMvQCAq70AAAA+AABMPQCAq70AAAA+AIAYPQCAq70AAGI9AABMvQCAq70AAAA+AABMPQCAqz0AAAA+AABMPQCAq70AAAA+AABMPQCAqz0AAAA+lq26vACAqz1SlZ89BOzePACAqz1SlZ89AABMPQCAq70AAAC+AIAYPQCAq70AAGI9AABMPQCAq70AAAA+AABMPQCAqz0AAAA+BOzePACAqz1SlZ89AezePACAqz26eZu9AABMPQCAq70AAAC+AABMPQCAq70AAAA+AABMPQCAqz0AAAA+AIAYvZlAYr4AAGK9AIAYvQCAq70AAGK9AIAYvQCAq70AAGI9AIAYvZlAYr4AAGK9AIAYPZlAYr4AAGK9AIAYvQCAq70AAGK9AIAYvZlAYr4AAGK9AIAYvZlAYr4AAGI9AIAYPZlAYr4AAGK9AIAYvZlAYr4AAGK9AIAYvQCAq70AAGI9AIAYvZlAYr4AAGI9AIAYvZlAYr4AAGI9AIAYvQCAq70AAGI9AIAYPQCAq70AAGI9AIAYPZlAYr4AAGK9AIAYPQCAq70AAGK9AIAYvQCAq70AAGK9AIAYPZlAYr4AAGK9AIAYPZlAYr4AAGI9AIAYPQCAq70AAGK9AIAYvZlAYr4AAGI9AIAYPZlAYr4AAGI9AIAYPZlAYr4AAGK9AIAYvZlAYr4AAGI9AIAYPQCAq70AAGI9AIAYPZlAYr4AAGI9AIAYPZlAYr4AAGI9AIAYPQCAq70AAGI9AIAYPQCAq70AAGK9/38AAP//AAD/fwAA//8AAP9/AAD//wAAAAD/f/9//n8AAP9//3/+fwAA/3//f/5//3///wAAAAD/f///AAAAAP9//////wAA/38AAP//AAD/fwAA//8AAP9/AAD//wAA/////wAA/z//////AAD/P/////8AAP8//3///wAAAAD/f///AAAAAP9///8AAAAA/38AAP//AAD/fwAA//8AAP9/AAD//wAAAAD/f/9//n8AAP9//3/+fwAA/3//f/5//3//////AAD/f///AAAAAP9//////wAA/38AAP//AAD/fwAA//8AAP9/AAD//wAA/3//fwAA/z//f/9/AAD/P/9//38AAP8//3//////AAD/f/////8AAP9//////wAA/38AAP//AAD/fwAA//8AAP9/AAD//wAA/3///wAAAAD/f/////8AAP9///8AAAAA/////wAA/z//////AAD/P/////8AAP8//38AAP//AAD/fwAA//8AAP9/AAD//wAA////f/9//n////9//3/+f////3//f/5//3//////AAD/f/////8AAP9///8AAAAA/38AAP//AAD/fwAA//8AAP9/AAD//wAA/3//fwAA/z//f/9/AAD/P/9//38AAP8//3//////AAD/f/////8AAP9//////wAA/38AAP//AAD/fwAA//8AAP9/AAD//wAA/3//////AAD/f/////8AAP9///8AAAAA////f/9//n////9//3/+f////3//f/5/AAD/f/9//n8AAP9//3/+fwAA/3//f/5//////wAA/z//////AAD/P/////8AAP8//38AAP//AAD/fwAA//8AAP9/AAD//wAAAAD/f/9//n8AAP9//3/+fwAA/3//f/5//3//fwAA/z//f/9/AAD/P/9//38AAP8//////wAA/z//////AAD/P/////8AAP8/////f/9//n////9//3/+f////3//f/5//38AAP//AAD/fwAA//8AAP9/AAD//wAA/3//fwAA/z//f/9/AAD/P/9//38AAP8/////f/9//n////9//3/+f////3//f/5/")
+}, {
+"aabb": AABB(-0.022787858, 0.083740234, -0.07767976, 0.05000001, 0.35038555, 0.15919566),
+"attribute_data": PackedByteArray("AACAP5qZmT4AAIA/l7DIPgAAAACXsMg+AAAAPxb4Ij8nHH0/Hoh4PxdrAT8fiHg/AACAP5qZmT4AAAAAzcxMPgAAgD/NzEw+AAAAPxb4Ij8AAIA/iO0mPyccfT8eiHg/AACAP83MzD0AAAAAzczMPQAAgD/tg847AAAAPxb4Ij9hxUA/AAAAPwAAgD+I7SY/AACAP83MTD4AAAAAzczMPQAAgD/NzMw9AACAP5qZmT4AAAAAl7DIPgAAAACamZk+AACAP5qZmT4AAAAAmpmZPgAAAADNzEw+AAAAPxb4Ij/RKf0+H4h4PwAAAACI7SY/AAAAAM3MzD0AAAAA7YPOOwAAgD/tg847AACAP83MTD4AAAAAzcxMPgAAAADNzMw9AAAAAIjtJj/RKf0+H4h4P2P2ODweiHg/AAAAPxb4Ij8AAAAAiO0mP3zqfD4AAAA/"),
+"format": 34359738391,
+"material": SubResource("StandardMaterial3D_sxc4o"),
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 42,
+"vertex_data": PackedByteArray("mq26vJo5qj6RFp+9mq26vACAqz26eZu9AezePACAqz26eZu9mq26vJo5qj6RFp+9lq26vACAqz1SlZ89mq26vACAqz26eZu9mq26vJo5qj6RFp+9AuzePLxF3j4AjDw7mK26vLxF3j4AjDw7mq26vJo5qj6RFp+9lq26vDZVpD7Q8aY9lq26vACAqz1SlZ89lq26vDZVpD7Q8aY9BOzePDZVpD7Q8aY9lq26vACAqz1SlZ89mq26vJo5qj6RFp+9mK26vLxF3j4AjDw7lq26vDZVpD7Q8aY9mK26vLxF3j4AjDw7BOzePDZVpD7Q8aY9lq26vDZVpD7Q8aY9mq26vJo5qj6RFp+9AezePACAqz26eZu9AezePJo5qj6RFp+9mq26vJo5qj6RFp+9AezePJo5qj6RFp+9AuzePLxF3j4AjDw7AezePJo5qj6RFp+9AezePACAqz26eZu9BOzePDZVpD7Q8aY9BOzePDZVpD7Q8aY9BOzePACAqz1SlZ89lq26vACAqz1SlZ89mK26vLxF3j4AjDw7AuzePLxF3j4AjDw7BOzePDZVpD7Q8aY9BOzePDZVpD7Q8aY9AezePACAqz26eZu9BOzePACAqz1SlZ89AezePJo5qj6RFp+9BOzePDZVpD7Q8aY9AuzePLxF3j4AjDw7GP8AAAAA/78Y/wAAAAD/vxj/AAAAAP+/AAD/f/9//78AAP9//3//vwAA/3//f/+/aMf//wAA/79ox///AAD/v2jH//8AAP+/AAD/f/9//78AAP9//3//vwAA/3//f/+//38WfgAA/7//fxZ+AAD/v/9/Fn4AAP+/AAD/f/9//78AAP9//3//vwAA/3//f/+//396tAAA/7//f3q0AAD/v/9/erQAAP+/GP8AAAAA/78Y/wAAAAD/vxj/AAAAAP+/aMf//wAA/79ox///AAD/v2jH//8AAP+/////fwAAAID///9/AAAAgP///38AAACA/38WfgAA/7//fxZ+AAD/v/9/Fn4AAP+//396tAAA/7//f3q0AAD/v/9/erQAAP+/////f/////////9//////////3//////////fwAAAID///9/AAAAgP///38AAACA")
+}]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_gbnqi"]
+radius = 0.57214355
+height = 1.353
+
+[node name="EnemySmall" type="CharacterBody3D" node_paths=PackedStringArray("health_component", "hitbox_component", "state_machine", "animations", "nav_agent")]
 script = ExtResource("1_afgpb")
 move_speed = 5.0
 health_component = NodePath("HealthComponent")
 hitbox_component = NodePath("HitboxComponent")
 state_machine = NodePath("StateMachine")
-mesh = NodePath("Mesh")
 animations = NodePath("AnimationPlayer")
 nav_agent = NodePath("NavigationAgent3D")
 
@@ -67,13 +228,17 @@ radius = 10.0
 debug_enabled = true
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_w6c2i")
+}
 
 [node name="HealthComponent" type="Node" parent="."]
 script = ExtResource("2_mipfx")
 max_health = 50.0
 
 [node name="HitboxComponent" type="Area3D" parent="." node_paths=PackedStringArray("health_component")]
-collision_layer = 3
+visible = false
+collision_layer = 2
 script = ExtResource("3_1ei65")
 health_component = NodePath("../HealthComponent")
 
@@ -82,10 +247,48 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.75, 0)
 shape = SubResource("CapsuleShape3D_08bp1")
 debug_color = Color(0.9607843, 0, 0.26666668, 0.84705883)
 
-[node name="StateMachine" type="Node" parent="."]
+[node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("starting_state")]
 script = ExtResource("4_mipfx")
+starting_state = NodePath("Idle")
 metadata/_custom_type_script = "uid://cmek1dcaubhxl"
 
-[node name="Idle" type="Node" parent="StateMachine"]
+[node name="Idle" type="Node" parent="StateMachine" node_paths=PackedStringArray("idle_state", "moving_state")]
+script = ExtResource("5_1ei65")
+idle_state = NodePath(".")
+moving_state = NodePath("../Moving")
 
-[node name="Moving" type="Node" parent="StateMachine"]
+[node name="Moving" type="Node" parent="StateMachine" node_paths=PackedStringArray("idle_state", "moving_state", "attack_state")]
+script = ExtResource("6_qtmrm")
+idle_state = NodePath("../Idle")
+moving_state = NodePath(".")
+attack_state = NodePath("../Attack")
+
+[node name="Attack" type="Node" parent="StateMachine" node_paths=PackedStringArray("idle_state")]
+script = ExtResource("7_x7bwl")
+idle_state = NodePath("../Idle")
+move_speed = 0.0
+
+[node name="Label3D" type="Label3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.1980622, 0)
+billboard = 1
+text = "State"
+font_size = 50
+
+[node name="Knife" type="MeshInstance3D" parent="."]
+unique_name_in_owner = true
+transform = Transform3D(0.9882548, -0.14665183, -0.042961396, 0.078626014, 0.24690083, 0.9658457, -0.13103583, -0.95787954, 0.25553158, 0.6144146, 0.6173438, -0.10717255)
+mesh = SubResource("ArrayMesh_66v6q")
+
+[node name="HurtboxComponent" type="Area3D" parent="Knife"]
+transform = Transform3D(1, 1.4901161e-08, 3.7252903e-09, -1.4901161e-08, 0.99999994, 1.4901161e-08, 3.7252903e-09, 0, 1, 0, 0, 0)
+collision_layer = 0
+collision_mask = 4
+script = ExtResource("8_gbnqi")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Knife/HurtboxComponent"]
+transform = Transform3D(1, 1.937155e-07, 1.0058304e-06, -1.937155e-07, 1, -3.4106688e-13, -1.0058304e-06, 1.4622194e-13, 1, 7.1525574e-07, 0.49353033, -1.7136335e-07)
+shape = SubResource("CapsuleShape3D_gbnqi")
+disabled = true
+debug_color = Color(0.7019608, 0, 0, 1)
+
+[connection signal="animation_finished" from="AnimationPlayer" to="StateMachine/Attack" method="_on_animation_player_animation_finished"]

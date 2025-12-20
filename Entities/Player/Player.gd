@@ -1,8 +1,12 @@
 extends CharacterBody3D
 class_name Player
 
+@export var player_state_machine: StateMachine
+@export var health_component: HealthComponent
+@export var hitbox_component: HitboxComponent
+
 # --References----------------------------------------------------------|
-@onready var player_state_machine: StateMachine = %PlayerStateMachine
+
 @onready var head: Node3D = $Head
 @onready var eyes: Camera3D = $Head/Eyes
 @onready var nav_points: Node3D = %NavPointsInner
@@ -52,7 +56,7 @@ func _unhandled_input(event: InputEvent) -> void:
 
 
 func _process(_delta: float) -> void:
-	enemy_count_label.text = "Enemies remaining: " + str(GameManager.wave_manager.current_enemies)
+	#enemy_count_label.text = "Enemies remaining: " + str(GameManager.wave_manager.current_enemies)
 	if Input.is_action_pressed("action") and not GameManager.game_started:
 		texture_progress_bar.value += 1.0
 		if texture_progress_bar.value >= 100.0:
@@ -60,6 +64,7 @@ func _process(_delta: float) -> void:
 			start_game_container.hide()
 	elif Input.is_action_just_released("action") and not GameManager.game_started:
 		texture_progress_bar.value = 0.0
+
 
 func _physics_process(delta: float) -> void:
 	#Display the current state.
@@ -105,8 +110,8 @@ func raycast():
 			collider.take_damage.call_deferred(55.0)
 
 
-func get_nav_points() -> Array:
-	return nav_points.get_children()
+#func get_nav_points() -> Array:
+	#return nav_points.get_children()
 
 
 func get_available_navpoint() -> NavPoint:
@@ -122,3 +127,7 @@ func get_available_navpoint() -> NavPoint:
 	var nav: NavPoint = available_points.get(i)
 	
 	return nav
+
+
+func _on_health_component_damage_taken(amount: Variant) -> void:
+	print("Ow, that hurt like a " + str(amount))

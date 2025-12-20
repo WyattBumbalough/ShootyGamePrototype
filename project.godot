@@ -31,7 +31,8 @@ window/size/viewport_height=1080
 folder_colors={
 "res://Assets/": "green",
 "res://Common/": "blue",
-"res://Entities/": "yellow"
+"res://Entities/": "yellow",
+"res://Entities/Enemies/Small/States/": "yellow"
 }
 
 [input]
@@ -100,6 +101,7 @@ action={
 [layer_names]
 
 3d_physics/layer_2="Hitbox"
+3d_physics/layer_3="Player Hitbox"
 
 [navigation]
 

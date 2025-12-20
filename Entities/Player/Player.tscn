@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=3 uid="uid://dxpf6y10dmc1q"]
+[gd_scene load_steps=27 format=3 uid="uid://dxpf6y10dmc1q"]
 
 [ext_resource type="Script" uid="uid://cs730ueljjghv" path="res://Entities/Player/Player.gd" id="1_xhfnw"]
 [ext_resource type="Script" uid="uid://clxmkhw2qrcfq" path="res://Entities/Weapons/WeaponManager/weapon_manager.gd" id="2_jynvv"]
@@ -12,6 +12,8 @@
 [ext_resource type="Texture2D" uid="uid://cb4ydn7v8canl" path="res://Assets/Textures/crosshair001.png" id="7_hj1c0"]
 [ext_resource type="PackedScene" uid="uid://cgaokdy727hb0" path="res://Entities/Player/navpoint.tscn" id="11_jynvv"]
 [ext_resource type="Texture2D" uid="uid://diloe1tpvxvsl" path="res://Assets/Icons/circle.png" id="11_lmeus"]
+[ext_resource type="Script" uid="uid://c0lh3xudunkd8" path="res://Common/Components/health_component.gd" id="13_uw7o4"]
+[ext_resource type="Script" uid="uid://bnh6tgipmolts" path="res://Common/Components/hitbox_component.gd" id="14_gallu"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_t38ms"]
 albedo_color = Color(1, 0.47058824, 0.20784314, 1)
@@ -52,11 +54,16 @@ content_margin_bottom = 150.0
 [sub_resource type="LabelSettings" id="LabelSettings_lmeus"]
 font_size = 25
 
-[node name="Player" type="CharacterBody3D"]
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_samso"]
+
+[node name="Player" type="CharacterBody3D" node_paths=PackedStringArray("player_state_machine", "health_component", "hitbox_component")]
 script = ExtResource("1_xhfnw")
+player_state_machine = NodePath("PlayerStateMachine")
+health_component = NodePath("HealthComponent")
+hitbox_component = NodePath("HitboxComponent")
 
 [node name="Head" type="Node3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.25, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.8486044, 0)
 
 [node name="Eyes" type="Camera3D" parent="Head"]
 cull_mask = 524287
@@ -96,140 +103,9 @@ mesh = SubResource("CapsuleMesh_kpjcp")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 shape = SubResource("CapsuleShape3D_kne1u")
 
-[node name="PlayerStateMachine" type="Node" parent="." node_paths=PackedStringArray("starting_state")]
-unique_name_in_owner = true
-script = ExtResource("2_ww0jn")
-starting_state = NodePath("Idle")
-
-[node name="Idle" type="Node" parent="PlayerStateMachine" node_paths=PackedStringArray("idle_state", "jump_state", "falling_state", "moving_state")]
-script = ExtResource("3_vweq0")
-idle_state = NodePath(".")
-jump_state = NodePath("../Jump")
-falling_state = NodePath("../Falling")
-moving_state = NodePath("../Moving")
-move_speed = 0.0
-accel = null
-friction = null
-metadata/_custom_type_script = "uid://wp5qe084fq8l"
-
-[node name="Moving" type="Node" parent="PlayerStateMachine" node_paths=PackedStringArray("idle_state", "jump_state", "falling_state", "moving_state")]
-script = ExtResource("4_1des2")
-idle_state = NodePath("../Idle")
-jump_state = NodePath("../Jump")
-falling_state = NodePath("../Falling")
-moving_state = NodePath(".")
-move_speed = null
-accel = 0.25
-friction = null
-
-[node name="Falling" type="Node" parent="PlayerStateMachine" node_paths=PackedStringArray("idle_state", "jump_state", "falling_state", "moving_state")]
-script = ExtResource("5_an6q6")
-idle_state = NodePath("../Idle")
-jump_state = NodePath("../Jump")
-falling_state = NodePath(".")
-moving_state = NodePath("../Moving")
-move_speed = null
-accel = null
-friction = 0.25
-
-[node name="Jump" type="Node" parent="PlayerStateMachine" node_paths=PackedStringArray("idle_state", "jump_state", "falling_state", "moving_state")]
-script = ExtResource("6_t38ms")
-jump_force = 7.5
-idle_state = NodePath("../Idle")
-jump_state = NodePath(".")
-falling_state = NodePath("../Falling")
-moving_state = NodePath("../Moving")
-move_speed = null
-accel = null
-friction = null
-
-[node name="CanvasLayer" type="CanvasLayer" parent="."]
-
-[node name="Reticle Container" type="CenterContainer" parent="CanvasLayer"]
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-mouse_filter = 2
-
-[node name="Reticle" type="TextureRect" parent="CanvasLayer/Reticle Container"]
-layout_mode = 2
-texture = ExtResource("7_hj1c0")
-
-[node name="Control" type="Control" parent="CanvasLayer"]
-layout_mode = 3
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-mouse_filter = 2
-
-[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/Control"]
-custom_minimum_size = Vector2(300, 100)
-layout_mode = 1
-offset_right = 590.0
-offset_bottom = 111.0
-theme_override_constants/margin_left = 20
-theme_override_constants/margin_top = 25
-
-[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/Control/MarginContainer"]
-layout_mode = 2
-size_flags_vertical = 0
-
-[node name="WaveCountLabel" type="Label" parent="CanvasLayer/Control/MarginContainer/VBoxContainer"]
-unique_name_in_owner = true
-layout_mode = 2
-size_flags_horizontal = 0
-theme_override_styles/normal = SubResource("StyleBoxEmpty_hj1c0")
-text = "Wave: 1"
-label_settings = SubResource("LabelSettings_x44r4")
-
-[node name="EnemyCountLabel" type="Label" parent="CanvasLayer/Control/MarginContainer/VBoxContainer"]
-unique_name_in_owner = true
-layout_mode = 2
-size_flags_horizontal = 0
-theme_override_styles/normal = SubResource("StyleBoxEmpty_hj1c0")
-text = "Enemies remaining: "
-label_settings = SubResource("LabelSettings_x44r4")
-
-[node name="CurrentState" type="Label" parent="CanvasLayer/Control"]
-unique_name_in_owner = true
-layout_mode = 1
-anchors_preset = 1
-anchor_left = 1.0
-anchor_right = 1.0
-offset_left = -40.0
-offset_bottom = 23.0
-grow_horizontal = 0
-theme_override_styles/normal = SubResource("StyleBoxEmpty_x44r4")
-text = "Walking"
-label_settings = SubResource("LabelSettings_761t5")
-
-[node name="StartGameContainer" type="CenterContainer" parent="CanvasLayer"]
-unique_name_in_owner = true
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-mouse_filter = 2
-
-[node name="Label" type="Label" parent="CanvasLayer/StartGameContainer"]
-layout_mode = 2
-theme_override_styles/normal = SubResource("StyleBoxEmpty_jynvv")
-text = "Hold [E] to start."
-label_settings = SubResource("LabelSettings_lmeus")
-
-[node name="TextureProgressBar" type="TextureProgressBar" parent="CanvasLayer/StartGameContainer"]
-unique_name_in_owner = true
-layout_mode = 2
-fill_mode = 4
-texture_progress = ExtResource("11_lmeus")
-
 [node name="NavPointsInner" type="Node3D" parent="."]
 unique_name_in_owner = true
+visible = false
 
 [node name="pt1" parent="NavPointsInner" instance=ExtResource("11_jynvv")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.5, 0.25, 0)
@@ -254,3 +130,145 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.75, 0.25, 1.75)
 
 [node name="pt8" parent="NavPointsInner" instance=ExtResource("11_jynvv")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.75, 0.25, -1.75)
+
+[node name="PlayerStateMachine" type="Node" parent="." node_paths=PackedStringArray("starting_state")]
+unique_name_in_owner = true
+script = ExtResource("2_ww0jn")
+starting_state = NodePath("Idle")
+
+[node name="Idle" type="Node" parent="PlayerStateMachine" node_paths=PackedStringArray("idle_state", "jump_state", "falling_state", "moving_state")]
+script = ExtResource("3_vweq0")
+idle_state = NodePath(".")
+jump_state = NodePath("../Jump")
+falling_state = NodePath("../Falling")
+moving_state = NodePath("../Moving")
+move_speed = 0.0
+metadata/_custom_type_script = "uid://wp5qe084fq8l"
+
+[node name="Moving" type="Node" parent="PlayerStateMachine" node_paths=PackedStringArray("idle_state", "jump_state", "falling_state", "moving_state")]
+script = ExtResource("4_1des2")
+idle_state = NodePath("../Idle")
+jump_state = NodePath("../Jump")
+falling_state = NodePath("../Falling")
+moving_state = NodePath(".")
+accel = 0.25
+
+[node name="Falling" type="Node" parent="PlayerStateMachine" node_paths=PackedStringArray("idle_state", "jump_state", "falling_state", "moving_state")]
+script = ExtResource("5_an6q6")
+idle_state = NodePath("../Idle")
+jump_state = NodePath("../Jump")
+falling_state = NodePath(".")
+moving_state = NodePath("../Moving")
+friction = 0.25
+
+[node name="Jump" type="Node" parent="PlayerStateMachine" node_paths=PackedStringArray("idle_state", "jump_state", "falling_state", "moving_state")]
+script = ExtResource("6_t38ms")
+jump_force = 7.5
+idle_state = NodePath("../Idle")
+jump_state = NodePath(".")
+falling_state = NodePath("../Falling")
+moving_state = NodePath("../Moving")
+
+[node name="UI" type="CanvasLayer" parent="."]
+visible = false
+
+[node name="Reticle Container" type="CenterContainer" parent="UI"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="Reticle" type="TextureRect" parent="UI/Reticle Container"]
+layout_mode = 2
+texture = ExtResource("7_hj1c0")
+
+[node name="Control" type="Control" parent="UI"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="UI/Control"]
+custom_minimum_size = Vector2(300, 100)
+layout_mode = 1
+offset_right = 590.0
+offset_bottom = 111.0
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 25
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UI/Control/MarginContainer"]
+layout_mode = 2
+size_flags_vertical = 0
+
+[node name="WaveCountLabel" type="Label" parent="UI/Control/MarginContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 0
+theme_override_styles/normal = SubResource("StyleBoxEmpty_hj1c0")
+text = "Wave: 1"
+label_settings = SubResource("LabelSettings_x44r4")
+
+[node name="EnemyCountLabel" type="Label" parent="UI/Control/MarginContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 0
+theme_override_styles/normal = SubResource("StyleBoxEmpty_hj1c0")
+text = "Enemies remaining: "
+label_settings = SubResource("LabelSettings_x44r4")
+
+[node name="CurrentState" type="Label" parent="UI/Control"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -40.0
+offset_bottom = 23.0
+grow_horizontal = 0
+theme_override_styles/normal = SubResource("StyleBoxEmpty_x44r4")
+text = "Walking"
+label_settings = SubResource("LabelSettings_761t5")
+
+[node name="StartGameContainer" type="CenterContainer" parent="UI"]
+unique_name_in_owner = true
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="Label" type="Label" parent="UI/StartGameContainer"]
+layout_mode = 2
+theme_override_styles/normal = SubResource("StyleBoxEmpty_jynvv")
+text = "Hold [E] to start."
+label_settings = SubResource("LabelSettings_lmeus")
+
+[node name="TextureProgressBar" type="TextureProgressBar" parent="UI/StartGameContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+fill_mode = 4
+texture_progress = ExtResource("11_lmeus")
+
+[node name="HealthComponent" type="Node" parent="."]
+script = ExtResource("13_uw7o4")
+metadata/_custom_type_script = "uid://c0lh3xudunkd8"
+
+[node name="HitboxComponent" type="Area3D" parent="." node_paths=PackedStringArray("health_component")]
+collision_layer = 4
+collision_mask = 0
+script = ExtResource("14_gallu")
+health_component = NodePath("../HealthComponent")
+metadata/_custom_type_script = "uid://bnh6tgipmolts"
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="HitboxComponent"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+shape = SubResource("CapsuleShape3D_samso")
+debug_color = Color(0.70196074, 0, 0, 0.41960785)
+
+[connection signal="damage_taken" from="HealthComponent" to="." method="_on_health_component_damage_taken"]

@@ -1,3 +1,4 @@
+@icon("res://Assets/Icons/owie.png")
 extends Area3D
 class_name HitboxComponent
 
