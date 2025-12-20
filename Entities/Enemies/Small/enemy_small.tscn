@@ -85,3 +85,7 @@ debug_color = Color(0.9607843, 0, 0.26666668, 0.84705883)
 [node name="StateMachine" type="Node" parent="."]
 script = ExtResource("4_mipfx")
 metadata/_custom_type_script = "uid://cmek1dcaubhxl"
+
+[node name="Idle" type="Node" parent="StateMachine"]
+
+[node name="Moving" type="Node" parent="StateMachine"]
