@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=4 uid="uid://b58n3ea82dc54"]
+[gd_scene load_steps=23 format=4 uid="uid://b58n3ea82dc54"]
 
 [ext_resource type="Script" uid="uid://b5aers873e8rj" path="res://Entities/Enemies/enemy.gd" id="1_afgpb"]
 [ext_resource type="Script" uid="uid://c0lh3xudunkd8" path="res://Common/Components/health_component.gd" id="2_mipfx"]
@@ -8,7 +8,6 @@
 [ext_resource type="Script" uid="uid://ktn5hhlkhiya" path="res://Entities/Enemies/Small/States/enemy_small_moving.gd" id="6_qtmrm"]
 [ext_resource type="Script" uid="uid://c3gqa1clvbac3" path="res://Entities/Enemies/Small/States/enemy_small_attack.gd" id="7_x7bwl"]
 [ext_resource type="Script" uid="uid://dyjicjvku038e" path="res://Common/Components/hurtbox_component.gd" id="8_gbnqi"]
-[ext_resource type="Script" uid="uid://cyseg2uhnh0nx" path="res://Entities/Enemies/Small/States/enemy_small_jump.gd" id="8_w7pc1"]
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_wbf3x"]
 height = 1.5
@@ -258,9 +257,8 @@ script = ExtResource("5_1ei65")
 idle_state = NodePath(".")
 moving_state = NodePath("../Moving")
 
-[node name="Moving" type="Node" parent="StateMachine" node_paths=PackedStringArray("jump_state", "idle_state", "moving_state", "attack_state")]
+[node name="Moving" type="Node" parent="StateMachine" node_paths=PackedStringArray("idle_state", "moving_state", "attack_state")]
 script = ExtResource("6_qtmrm")
-jump_state = NodePath("../Jump")
 idle_state = NodePath("../Idle")
 moving_state = NodePath(".")
 attack_state = NodePath("../Attack")
@@ -269,9 +267,6 @@ attack_state = NodePath("../Attack")
 script = ExtResource("7_x7bwl")
 idle_state = NodePath("../Idle")
 move_speed = 0.0
-
-[node name="Jump" type="Node" parent="StateMachine"]
-script = ExtResource("8_w7pc1")
 
 [node name="Label3D" type="Label3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.1980622, 0)
@@ -296,5 +291,4 @@ shape = SubResource("CapsuleShape3D_gbnqi")
 disabled = true
 debug_color = Color(0.7019608, 0, 0, 1)
 
-[connection signal="link_reached" from="NavigationAgent3D" to="StateMachine/Moving" method="_on_navigation_agent_3d_link_reached"]
 [connection signal="animation_finished" from="AnimationPlayer" to="StateMachine/Attack" method="_on_animation_player_animation_finished"]

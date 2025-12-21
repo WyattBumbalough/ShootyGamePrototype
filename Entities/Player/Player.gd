@@ -22,18 +22,21 @@ class_name Player
 var lock_mouse: bool
 var mouse_sens = 0.005
 var can_move: bool = true
+var double_jump: bool
 #--Variables end--
 
 
 func _ready() -> void:
-		Global.CurrentPlayer = self
-		Global.PlayerStateMachine = player_state_machine
-		
-		Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
-		player_state_machine.initialize(self)
-		
-		head.rotation.y = rotation.y
-		rotation.y = 0
+	add_to_group("Player")
+	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
+	Global.CurrentPlayer = self
+	Global.PlayerStateMachine = player_state_machine
+	
+	
+	player_state_machine.initialize(self)
+	
+	head.rotation.y = rotation.y
+	rotation.y = 0
 
 
 func _unhandled_input(event: InputEvent) -> void:
@@ -57,13 +60,16 @@ func _unhandled_input(event: InputEvent) -> void:
 
 func _process(_delta: float) -> void:
 	#enemy_count_label.text = "Enemies remaining: " + str(GameManager.wave_manager.current_enemies)
-	if Input.is_action_pressed("action") and not GameManager.game_started:
-		texture_progress_bar.value += 1.0
-		if texture_progress_bar.value >= 100.0:
-			GameManager.start_game()
-			start_game_container.hide()
-	elif Input.is_action_just_released("action") and not GameManager.game_started:
-		texture_progress_bar.value = 0.0
+	if start_game_container.visible:
+		if Input.is_action_pressed("action") and not GameManager.game_started:
+			texture_progress_bar.value += 1.0
+			if texture_progress_bar.value >= 100.0:
+				GameManager.start_game()
+				start_game_container.hide()
+		elif Input.is_action_just_released("action") and not GameManager.game_started:
+			texture_progress_bar.value = 0.0
+	#		Do a bunch of stuff.
+
 
 
 func _physics_process(delta: float) -> void:

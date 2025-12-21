@@ -14,16 +14,23 @@ func exit():
 func handle_physics(_delta) -> State:
 	Char.handle_movement(move_speed, accel, friction)
 	coyote += 1
-	if Char.velocity.y <= 0: #Is the character accelerating upwards?
-		if Char.is_on_floor(): # Are they on the floor?
-			if Input.get_vector("left", "right", "up", "down") == Vector2.ZERO: #Are they not pressing any inputs?
-				return idle_state
-			else:
-				return moving_state
+	
+	if Char.velocity.y == 0.0 and Char.is_on_floor():
+		# If not holding a direction, return to idle. 
+		# Otherwise switch back to moving.
+		if Input.get_vector("left","right","up","down") == Vector2.ZERO:
+			return idle_state
 		else:
-			return null
-	else:
-		return null
+			return moving_state 
+	
+	if jump_state.can_double_jump:
+		
+		if Input.is_action_just_pressed("jump") and Char.double_jump == true:
+			print("aa")
+			return jump_state
+	
+	
+	return null
 
 func handle_input(_event: InputEvent) -> State:
 	if _event.is_action_pressed("jump"):

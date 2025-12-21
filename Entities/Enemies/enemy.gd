@@ -16,36 +16,34 @@ var path_offset: Vector3 = Vector3.ZERO
 var navpoint: NavPoint
 
 var has_target: bool = false
+var player: Player
 
-var active: bool = true
+var gravity_enabled: bool = true
 var dead: bool = false
 
 func _ready():
-	# Docs say to not use await in _ready, but you need to wait a frame to give
-	# the navigation server time to sync. So this is how you do dat, BITCH.
 	setup.call_deferred()
-	
 	state_machine.initialize(self)
 	
 	# Call die() when health reaches zero.
 	health_component.health_reached_zero.connect(die)
+	
 
 
 func setup():
-	#await get_tree().physics_frame
-	#
+	await get_tree().physics_frame
 	move_speed += randf_range(0.5, 2.0) # Add variation to move speed so they won't clump up.
-	#path_offset += Vector3(randf_range(0.5,2.5), 0.0, randf_range(0.5,2.5)) # Same for target postition.
-	#
-	#set_target_location(Global.CurrentPlayer.global_position + path_offset)
-	#navpoint = Global.get_nav_point()
-	#if navpoint:
-		#set_target_location(navpoint.global_position)
+	
+	player = get_tree().get_first_node_in_group("Player")
 	
 
 func _physics_process(delta: float) -> void:
 	state_machine.handle_physics(delta)	
 	$Label3D.text = state_machine.current_state.name
+	
+
+	if not is_on_floor() and gravity_enabled:
+		velocity += get_gravity() * delta
 	
 	move_and_slide()
 
@@ -61,11 +59,11 @@ func handle_movement(speed: float, delta: float):
 	var next_pos = nav_agent.get_next_path_position()
 	var dir = current_pos.direction_to(next_pos)
 	
-	var rotation_speed = 4
-	var target_rotation = dir.signed_angle_to(Vector3.MODEL_REAR, Vector3.DOWN)
-	if abs(target_rotation - rotation.y) > deg_to_rad(60):
-		rotation_speed = 20 # Rotates faster if more than 60 deg required.
-	rotation.y = move_toward(rotation.y, target_rotation, delta * rotation_speed)
+	#var rotation_speed = 4
+	#var target_rotation = dir.signed_angle_to(Vector3.MODEL_REAR, Vector3.DOWN)
+	#if abs(target_rotation - rotation.y) > deg_to_rad(60):
+		#rotation_speed = 20 # Rotates faster if more than 60 deg required.
+	#rotation.y = move_toward(rotation.y, target_rotation, delta * rotation_speed)
 	
 	velocity = dir * speed
 
