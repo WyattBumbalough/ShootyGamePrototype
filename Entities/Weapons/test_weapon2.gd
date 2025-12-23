@@ -17,14 +17,10 @@ func unequip():
 
 
 func shoot():
-	if !can_shoot:
-		return
-	if !animations:
-		return
+	super()
 	animations.play("shoot")
 	audio.stream = load("res://Assets/SFX/doom_SS_shoot.mp3")
 	audio.play()
-	Global.CurrentPlayer.raycast()
 	can_shoot = false
 	await animations.animation_finished
 	reload()

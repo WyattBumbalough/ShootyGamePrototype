@@ -84,15 +84,15 @@ func handle_movement(speed: float, accel: float, friction: float):
 			velocity.z = lerp(velocity.z, direction.z * speed, accel)
 
 
-func raycast():
-	# Raycast should only run when this function is called, so that it isn't constantly
-	# calculating collisions.
-	var ray: RayCast3D = $Head/Eyes/TestRaycast
-	ray.force_raycast_update()
-	if ray.is_colliding():
-		var collider = ray.get_collider()
-		if collider is HitboxComponent:
-			collider.take_damage.call_deferred(55.0)
+#func raycast():
+	## Raycast should only run when this function is called, so that it isn't constantly
+	## calculating collisions.
+	#var ray: RayCast3D = $Head/Eyes/TestRaycast
+	#ray.force_raycast_update()
+	#if ray.is_colliding():
+		#var collider = ray.get_collider()
+		#if collider is HitboxComponent:
+			#collider.take_damage.call_deferred(55.0)
 
 
 func get_nav_points() -> Array:

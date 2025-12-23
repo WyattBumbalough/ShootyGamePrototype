@@ -16,10 +16,7 @@ func unequip():
 
 
 func shoot():
-	if !can_shoot:
-		return
-	if !animations:
-		return
+	super()
 	if mag >= 12:
 		can_shoot = false
 		animations.play("reload")
@@ -34,7 +31,7 @@ func shoot():
 		animations.play("shoot")
 		audio.stream = load("res://Assets/SFX/duke_shoot.mp3")
 		audio.play()
-		Global.CurrentPlayer.raycast()
+		#Global.CurrentPlayer.raycast()
 		can_shoot = false
 		await animations.animation_finished
 		mag += 1

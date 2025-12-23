@@ -74,6 +74,9 @@ script = ExtResource("4_lmeus")
 
 [node name="Weapon2" parent="Head/Eyes/WeaponManager" instance=ExtResource("4_061yh")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.31308162, -0.28720427, -1.0853218)
+weapon_name = null
+damage = null
+ShotType = null
 
 [node name="Schnoz" type="MeshInstance3D" parent="Head"]
 transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, -0.40500748, -0.5736566)

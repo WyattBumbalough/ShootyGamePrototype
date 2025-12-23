@@ -1,0 +1,22 @@
+[gd_scene load_steps=4 format=3 uid="uid://c7vfmojgx51w1"]
+
+[ext_resource type="Script" uid="uid://jeswi5v76n3h" path="res://Entities/Weapons/projectile.gd" id="1_f45ai"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_f45ai"]
+size = Vector3(0.221, 0.276, 0.866)
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_8yjdh"]
+
+[node name="Nali" type="CharacterBody3D"]
+motion_mode = 1
+script = ExtResource("1_f45ai")
+
+[node name="Hitbox" type="Area3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Hitbox"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.012451172, 0.020760685, -0.001750946)
+shape = SubResource("BoxShape3D_f45ai")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.19858702, 0, 0, 0, 0.011611829, -0.21105613, 0, 0.40359566, 0.006072284, 0, 0, 0)
+mesh = SubResource("CapsuleMesh_8yjdh")
