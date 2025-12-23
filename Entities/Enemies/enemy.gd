@@ -19,6 +19,7 @@ var has_target: bool = false
 var player: Player
 
 var gravity_enabled: bool = true
+
 var dead: bool = false
 
 func _ready():
@@ -27,6 +28,7 @@ func _ready():
 	
 	# Call die() when health reaches zero.
 	health_component.health_reached_zero.connect(die)
+	#nav_agent.link_reached.connect(_on_link_reached)
 	
 
 
@@ -43,14 +45,14 @@ func _physics_process(delta: float) -> void:
 	
 
 	if not is_on_floor() and gravity_enabled:
-		velocity += get_gravity() * delta
+		velocity.y -= 9.5 * delta
 	
 	move_and_slide()
 
 
 func _process(delta: float) -> void:
 	state_machine.handle_process(delta)
-
+	
 
 func handle_movement(speed: float, delta: float):
 	set_target_location(navpoint.global_position)
@@ -59,10 +61,13 @@ func handle_movement(speed: float, delta: float):
 	var next_pos = nav_agent.get_next_path_position()
 	var dir = current_pos.direction_to(next_pos)
 	
-	#var rotation_speed = 4
-	#var target_rotation = dir.signed_angle_to(Vector3.MODEL_REAR, Vector3.DOWN)
-	#if abs(target_rotation - rotation.y) > deg_to_rad(60):
-		#rotation_speed = 20 # Rotates faster if more than 60 deg required.
+	var rotation_speed = 4
+	var target_rotation = dir.signed_angle_to(Vector3.MODEL_REAR, Vector3.DOWN)
+	if abs(target_rotation - rotation.y) > deg_to_rad(60):
+		rotation_speed = 20 # Rotates faster if more than 60 deg required.
+	
+	rotation.y = lerp_angle(rotation.y, target_rotation, delta * rotation_speed)
+	
 	#rotation.y = move_toward(rotation.y, target_rotation, delta * rotation_speed)
 	
 	velocity = dir * speed
@@ -82,3 +87,16 @@ func die():
 		navpoint.release()
 	queue_free()
 	
+
+func _on_link_reached(data: Dictionary):
+	gravity_enabled = false
+	velocity = Vector3(velocity.x, 2.5, velocity.z)
+	await get_tree().create_timer(1.5).timeout
+	gravity_enabled = true
+
+func jump(body: Node3D):
+	if body == self:
+		gravity_enabled = false
+		velocity = Vector3(velocity.x, 2.5, velocity.z)
+		await get_tree().create_timer(1.5).timeout
+		gravity_enabled = true

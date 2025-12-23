@@ -24,13 +24,11 @@ func handle_physics(_delta) -> State:
 			return moving_state 
 	
 	if jump_state.can_double_jump:
-		
 		if Input.is_action_just_pressed("jump") and Char.double_jump == true:
-			print("aa")
 			return jump_state
 	
-	
 	return null
+
 
 func handle_input(_event: InputEvent) -> State:
 	if _event.is_action_pressed("jump"):

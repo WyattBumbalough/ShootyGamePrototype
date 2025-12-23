@@ -1,0 +1,26 @@
+[gd_scene load_steps=4 format=3 uid="uid://b40gp8vf1kwsu"]
+
+[ext_resource type="Script" uid="uid://wgcujmc02rgg" path="res://Entities/Enemies/NavTest/enemy_nav_test.gd" id="1_kx8ge"]
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_kx8ge"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_1nq6q"]
+
+[node name="EnemyNavTest" type="CharacterBody3D"]
+script = ExtResource("1_kx8ge")
+gravity_enabled = true
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+mesh = SubResource("CapsuleMesh_kx8ge")
+skeleton = NodePath("../CollisionShape3D")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+shape = SubResource("CapsuleShape3D_1nq6q")
+
+[node name="NavigationAgent3D" type="NavigationAgent3D" parent="."]
+debug_enabled = true
+
+[node name="RecalcTimer" type="Timer" parent="."]
+wait_time = 0.25
