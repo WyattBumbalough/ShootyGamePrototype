@@ -40,7 +40,7 @@ func shoot():
 			if collision != {}: #Book empty, me no want
 				var target = collision.collider # Grab the object is collided with
 				if target is HitboxComponent:
-					target.take_damage.call_deferred(55.0)
+					target.take_damage.call_deferred(damage)
 			else:
 				return
 		shot_type.PROJ: #Projectile
