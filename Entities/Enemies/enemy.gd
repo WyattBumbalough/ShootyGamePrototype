@@ -28,7 +28,7 @@ func _ready():
 	
 	# Call die() when health reaches zero.
 	health_component.health_reached_zero.connect(die)
-	#nav_agent.link_reached.connect(_on_link_reached)
+	nav_agent.link_reached.connect(jump)
 	
 
 
@@ -88,15 +88,6 @@ func die():
 	queue_free()
 	
 
-func _on_link_reached(data: Dictionary):
-	gravity_enabled = false
-	velocity = Vector3(velocity.x, 2.5, velocity.z)
-	await get_tree().create_timer(1.5).timeout
-	gravity_enabled = true
-
-func jump(body: Node3D):
-	if body == self:
-		gravity_enabled = false
-		velocity = Vector3(velocity.x, 2.5, velocity.z)
-		await get_tree().create_timer(1.5).timeout
-		gravity_enabled = true
+func jump(data: Dictionary):
+	if is_on_floor():
+		velocity = Vector3(velocity.x, 1.5 * 5, velocity.z)

@@ -259,12 +259,13 @@ script = ExtResource("5_1ei65")
 idle_state = NodePath(".")
 moving_state = NodePath("../Moving")
 
-[node name="Moving" type="Node" parent="StateMachine" node_paths=PackedStringArray("jump_state", "idle_state", "moving_state", "attack_state")]
+[node name="Moving" type="Node" parent="StateMachine" node_paths=PackedStringArray("nav_agent", "idle_state", "moving_state", "attack_state")]
 script = ExtResource("6_qtmrm")
-jump_state = NodePath("../Jump")
+nav_agent = NodePath("../../NavigationAgent3D")
 idle_state = NodePath("../Idle")
 moving_state = NodePath(".")
 attack_state = NodePath("../Attack")
+move_speed = 5.0
 
 [node name="Attack" type="Node" parent="StateMachine" node_paths=PackedStringArray("idle_state")]
 script = ExtResource("7_x7bwl")
@@ -282,7 +283,7 @@ font_size = 50
 
 [node name="Knife" type="MeshInstance3D" parent="."]
 unique_name_in_owner = true
-transform = Transform3D(0.98825467, -0.14665183, -0.042961396, 0.07862601, 0.24690083, 0.9658457, -0.13103582, -0.95787954, 0.25553158, 0.6144146, 0.6173438, -0.10717255)
+transform = Transform3D(0.9882546, -0.14665183, -0.042961396, 0.078626, 0.24690083, 0.9658457, -0.1310358, -0.95787954, 0.25553158, 0.6144146, 0.6173438, -0.10717255)
 mesh = SubResource("ArrayMesh_66v6q")
 
 [node name="HurtboxComponent" type="Area3D" parent="Knife"]

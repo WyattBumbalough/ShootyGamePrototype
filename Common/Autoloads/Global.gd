@@ -11,13 +11,7 @@ var rng: RandomNumberGenerator
 
 
 func get_nav_point():
-	#var nav_points = CurrentPlayer.get_nav_points()
-	#var index = nav_points.size() - 1
-	#var point = nav_points.get(randi_range(0, index))
-	#return point.global_position
-	var navpoint = CurrentPlayer.get_available_navpoint()
-	if navpoint:
-		navpoint.claim()
-		return navpoint
-		
-	return null
+	if CurrentPlayer:
+		return CurrentPlayer.get_navpoint()
+	#if CurrentPlayer:
+		#return CurrentPlayer.get_navpoint()

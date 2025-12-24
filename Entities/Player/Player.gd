@@ -134,6 +134,16 @@ func get_available_navpoint() -> NavPoint:
 	
 	return nav
 
+func get_navpoint() -> NavPoint:
+	var points = nav_points.get_children()
+	var a = points.size() - 1
+	var index = randi_range(0, a)
+	var point = points.get(index)
+	#return point.global_position
+	if point:
+		return point
+	
+	return null
 
 func _on_health_component_damage_taken(amount: Variant) -> void:
 	print("Ow, that hurt like a " + str(amount))
