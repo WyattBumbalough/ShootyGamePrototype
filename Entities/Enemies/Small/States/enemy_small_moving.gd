@@ -16,8 +16,10 @@ var next_target: Vector3
 
 
 func enter(_previous_state: State):
+	move_speed += randf_range(0, 1.75)
 	navpoint = Global.get_nav_point()
 	nav_offset = Vector3(randf_range(0.5, 1.0), 0 , randf_range(0.5, 1.0))
+	set_target_position()
 
 
 func handle_process(_delta) -> State:
@@ -37,6 +39,8 @@ func handle_process(_delta) -> State:
 func handle_physics(_delta) -> State:
 	if time >= nav_delay:
 		set_target_position()
+		if Char.check_for_player():
+			return attack_state
 	else:
 		time += 1
 	
@@ -50,6 +54,11 @@ func handle_physics(_delta) -> State:
 			
 		Char.velocity.x = dir.x * move_speed
 		Char.velocity.z = dir.z * move_speed
+	
+	#if nav_agent.is_navigation_finished():
+		#Char.velocity = Vector3.ZERO
+		#return attack_state
+	
 	
 	return null
 

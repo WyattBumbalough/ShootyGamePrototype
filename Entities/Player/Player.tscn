@@ -57,6 +57,7 @@ font_size = 25
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_samso"]
 
 [node name="Player" type="CharacterBody3D" node_paths=PackedStringArray("player_state_machine", "health_component", "hitbox_component")]
+collision_layer = 9
 script = ExtResource("1_xhfnw")
 player_state_machine = NodePath("PlayerStateMachine")
 health_component = NodePath("HealthComponent")

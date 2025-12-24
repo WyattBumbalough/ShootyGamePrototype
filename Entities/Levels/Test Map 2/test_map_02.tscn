@@ -110,3 +110,9 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.84429646, 0, 9.561617)
 
 [node name="EnemySmall" parent="." instance=ExtResource("4_lbqlg")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.10543203, 0, -7.493663)
+
+[node name="EnemySmall2" parent="." instance=ExtResource("4_lbqlg")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.394568, 0, -12.993663)
+
+[node name="EnemySmall3" parent="." instance=ExtResource("4_lbqlg")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.855432, 0, -13.743663)

@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=4 uid="uid://b58n3ea82dc54"]
+[gd_scene load_steps=26 format=4 uid="uid://b58n3ea82dc54"]
 
 [ext_resource type="Script" uid="uid://b5aers873e8rj" path="res://Entities/Enemies/enemy.gd" id="1_afgpb"]
 [ext_resource type="Script" uid="uid://c0lh3xudunkd8" path="res://Common/Components/health_component.gd" id="2_mipfx"]
@@ -9,6 +9,7 @@
 [ext_resource type="Script" uid="uid://c3gqa1clvbac3" path="res://Entities/Enemies/Small/States/enemy_small_attack.gd" id="7_x7bwl"]
 [ext_resource type="Script" uid="uid://dyjicjvku038e" path="res://Common/Components/hurtbox_component.gd" id="8_gbnqi"]
 [ext_resource type="Script" uid="uid://cyseg2uhnh0nx" path="res://Entities/Enemies/Small/States/enemy_small_jump.gd" id="8_w7pc1"]
+[ext_resource type="Script" uid="uid://crp47tu2f1fix" path="res://Common/Components/detection_component.gd" id="10_cmykg"]
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_wbf3x"]
 height = 1.5
@@ -30,6 +31,14 @@ radial_segments = 10
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_6rqwt"]
 height = 1.5
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_08bp1"]
+radius = 0.6
+height = 1.5
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_cmykg"]
+height = 1.6186523
+radius = 2.2
 
 [sub_resource type="Animation" id="Animation_cmykg"]
 length = 0.001
@@ -72,7 +81,7 @@ tracks/2/keys = {
 tracks/3/type = "value"
 tracks/3/imported = false
 tracks/3/enabled = true
-tracks/3/path = NodePath("Knife/HurtboxComponent/CollisionShape3D:disabled")
+tracks/3/path = NodePath("HurtboxComponent/CollisionShape3D:disabled")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
@@ -91,10 +100,10 @@ tracks/0/path = NodePath("Mesh:position")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.3, 0.3674616, 0.5333333),
-"transitions": PackedFloat32Array(0.5, 2, 2, 2),
+"times": PackedFloat32Array(0, 0.3, 0.3674616, 0.6333333, 0.76666665),
+"transitions": PackedFloat32Array(0.5, 2, 2, 2, 0.5),
 "update": 0,
-"values": [Vector3(0, 0.75, 0), Vector3(0, 0.75, 0.75), Vector3(0, 0.75, 0.75), Vector3(0, 0.75, 0)]
+"values": [Vector3(0, 0.75, 0), Vector3(0, 0.75, 0.75), Vector3(0, 0.75, 0.75), Vector3(0, 0.75, -0.605), Vector3(0, 0.75, 0)]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -103,10 +112,10 @@ tracks/1/path = NodePath("Knife:position")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.36666667, 0.5333333, 0.6666666),
+"times": PackedFloat32Array(0, 0.36666667, 0.6333333, 0.9),
 "transitions": PackedFloat32Array(0.5, 2, 1, 1),
 "update": 0,
-"values": [Vector3(0.6144146, 0.6173438, -0.10717255), Vector3(0.64053243, 0.62981474, 0.8677707), Vector3(-0.107233405, 0.62981474, -0.7405869), Vector3(0.6144146, 0.6173438, -0.10717255)]
+"values": [Vector3(0.6144146, 0.6173438, -0.10717255), Vector3(0.64053243, 0.62981474, 0.8677707), Vector3(-0.107, 0.63, -1.451), Vector3(0.6144146, 0.6173438, -0.10717255)]
 }
 tracks/2/type = "value"
 tracks/2/imported = false
@@ -115,7 +124,7 @@ tracks/2/path = NodePath("Knife:rotation")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
-"times": PackedFloat32Array(0, 0.36666667, 0.49844816, 0.76666665),
+"times": PackedFloat32Array(0, 0.36666667, 0.49844816, 1),
 "transitions": PackedFloat32Array(0.5, 2, 1, 1),
 "update": 0,
 "values": [Vector3(-1.3086876, -0.16656783, 0.30829793), Vector3(-1.3086878, -1.077333, 0.30829793), Vector3(-0.29699415, -1.4837666, 1.502897), Vector3(-1.3086876, -0.16656783, 0.30829793)]
@@ -123,11 +132,11 @@ tracks/2/keys = {
 tracks/3/type = "value"
 tracks/3/imported = false
 tracks/3/enabled = true
-tracks/3/path = NodePath("Knife/HurtboxComponent/CollisionShape3D:disabled")
+tracks/3/path = NodePath("HurtboxComponent/CollisionShape3D:disabled")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
-"times": PackedFloat32Array(0, 0.43333334, 0.5573588),
+"times": PackedFloat32Array(0, 0.5, 0.6),
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 1,
 "values": [true, false, true]
@@ -157,9 +166,9 @@ _data = {
 &"run": SubResource("Animation_w7pc1")
 }
 
-[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_08bp1"]
-radius = 0.6
-height = 1.5
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_gbnqi"]
+radius = 0.886
+height = 1.938
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_hdf0l"]
 albedo_color = Color(0.32656252, 0.32656252, 0.32656252, 1)
@@ -189,18 +198,15 @@ _surfaces = [{
 "vertex_data": PackedByteArray("mq26vJo5qj6RFp+9mq26vACAqz26eZu9AezePACAqz26eZu9mq26vJo5qj6RFp+9lq26vACAqz1SlZ89mq26vACAqz26eZu9mq26vJo5qj6RFp+9AuzePLxF3j4AjDw7mK26vLxF3j4AjDw7mq26vJo5qj6RFp+9lq26vDZVpD7Q8aY9lq26vACAqz1SlZ89lq26vDZVpD7Q8aY9BOzePDZVpD7Q8aY9lq26vACAqz1SlZ89mq26vJo5qj6RFp+9mK26vLxF3j4AjDw7lq26vDZVpD7Q8aY9mK26vLxF3j4AjDw7BOzePDZVpD7Q8aY9lq26vDZVpD7Q8aY9mq26vJo5qj6RFp+9AezePACAqz26eZu9AezePJo5qj6RFp+9mq26vJo5qj6RFp+9AezePJo5qj6RFp+9AuzePLxF3j4AjDw7AezePJo5qj6RFp+9AezePACAqz26eZu9BOzePDZVpD7Q8aY9BOzePDZVpD7Q8aY9BOzePACAqz1SlZ89lq26vACAqz1SlZ89mK26vLxF3j4AjDw7AuzePLxF3j4AjDw7BOzePDZVpD7Q8aY9BOzePDZVpD7Q8aY9AezePACAqz26eZu9BOzePACAqz1SlZ89AezePJo5qj6RFp+9BOzePDZVpD7Q8aY9AuzePLxF3j4AjDw7GP8AAAAA/78Y/wAAAAD/vxj/AAAAAP+/AAD/f/9//78AAP9//3//vwAA/3//f/+/aMf//wAA/79ox///AAD/v2jH//8AAP+/AAD/f/9//78AAP9//3//vwAA/3//f/+//38WfgAA/7//fxZ+AAD/v/9/Fn4AAP+/AAD/f/9//78AAP9//3//vwAA/3//f/+//396tAAA/7//f3q0AAD/v/9/erQAAP+/GP8AAAAA/78Y/wAAAAD/vxj/AAAAAP+/aMf//wAA/79ox///AAD/v2jH//8AAP+/////fwAAAID///9/AAAAgP///38AAACA/38WfgAA/7//fxZ+AAD/v/9/Fn4AAP+//396tAAA/7//f3q0AAD/v/9/erQAAP+/////f/////////9//////////3//////////fwAAAID///9/AAAAgP///38AAACA")
 }]
 
-[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_gbnqi"]
-radius = 0.57214355
-height = 1.353
-
-[node name="EnemySmall" type="CharacterBody3D" node_paths=PackedStringArray("health_component", "hitbox_component", "state_machine", "animations", "nav_agent")]
+[node name="EnemySmall" type="CharacterBody3D" node_paths=PackedStringArray("state_machine", "animations", "nav_agent", "health_component", "hitbox_component", "detection_component")]
 script = ExtResource("1_afgpb")
 move_speed = 5.0
-health_component = NodePath("HealthComponent")
-hitbox_component = NodePath("HitboxComponent")
 state_machine = NodePath("StateMachine")
 animations = NodePath("AnimationPlayer")
 nav_agent = NodePath("NavigationAgent3D")
+health_component = NodePath("HealthComponent")
+hitbox_component = NodePath("HitboxComponent")
+detection_component = NodePath("DetectionComponent")
 
 [node name="Mesh" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.75, 0)
@@ -224,22 +230,11 @@ skeleton = NodePath("../../..")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.75, 0)
 shape = SubResource("CapsuleShape3D_6rqwt")
 
-[node name="NavigationAgent3D" type="NavigationAgent3D" parent="."]
-path_desired_distance = 2.5
-radius = 10.0
-debug_enabled = true
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-libraries = {
-&"": SubResource("AnimationLibrary_w6c2i")
-}
-
 [node name="HealthComponent" type="Node" parent="."]
 script = ExtResource("2_mipfx")
 max_health = 50.0
 
 [node name="HitboxComponent" type="Area3D" parent="." node_paths=PackedStringArray("health_component")]
-visible = false
 collision_layer = 2
 script = ExtResource("3_1ei65")
 health_component = NodePath("../HealthComponent")
@@ -248,6 +243,26 @@ health_component = NodePath("../HealthComponent")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.75, 0)
 shape = SubResource("CapsuleShape3D_08bp1")
 debug_color = Color(0.9607843, 0, 0.26666668, 0.84705883)
+
+[node name="DetectionComponent" type="Area3D" parent="."]
+collision_mask = 8
+script = ExtResource("10_cmykg")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="DetectionComponent"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.8093262, 0)
+shape = SubResource("CylinderShape3D_cmykg")
+debug_color = Color(0.6076347, 0.70196074, 0, 0.41960785)
+
+[node name="NavigationAgent3D" type="NavigationAgent3D" parent="."]
+path_desired_distance = 2.5
+avoidance_enabled = true
+radius = 10.0
+debug_enabled = true
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_w6c2i")
+}
 
 [node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("starting_state")]
 script = ExtResource("4_mipfx")
@@ -267,9 +282,10 @@ moving_state = NodePath(".")
 attack_state = NodePath("../Attack")
 move_speed = 5.0
 
-[node name="Attack" type="Node" parent="StateMachine" node_paths=PackedStringArray("idle_state")]
+[node name="Attack" type="Node" parent="StateMachine" node_paths=PackedStringArray("idle_state", "moving_state")]
 script = ExtResource("7_x7bwl")
 idle_state = NodePath("../Idle")
+moving_state = NodePath("../Moving")
 move_speed = 0.0
 
 [node name="Jump" type="Node" parent="StateMachine"]
@@ -281,22 +297,22 @@ billboard = 1
 text = "State"
 font_size = 50
 
-[node name="Knife" type="MeshInstance3D" parent="."]
-unique_name_in_owner = true
-transform = Transform3D(0.9882546, -0.14665183, -0.042961396, 0.078626, 0.24690083, 0.9658457, -0.1310358, -0.95787954, 0.25553158, 0.6144146, 0.6173438, -0.10717255)
-mesh = SubResource("ArrayMesh_66v6q")
-
-[node name="HurtboxComponent" type="Area3D" parent="Knife"]
-transform = Transform3D(1, 1.4901161e-08, 3.7252903e-09, -1.4901161e-08, 0.99999994, 1.4901161e-08, 3.7252903e-09, 0, 1, 0, 0, 0)
+[node name="HurtboxComponent" type="Area3D" parent="."]
+transform = Transform3D(0.38889542, -0.12996678, -0.9120684, 0.9168469, 0.15161984, 0.36932766, 0.09028725, -0.9798572, 0.17812388, -0.044527993, 0.76316977, -0.9049051)
 collision_layer = 0
 collision_mask = 4
 script = ExtResource("8_gbnqi")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Knife/HurtboxComponent"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="HurtboxComponent"]
 transform = Transform3D(1, 1.937155e-07, 1.0058304e-06, -1.937155e-07, 1, -3.4106688e-13, -1.0058304e-06, 1.4622194e-13, 1, 7.1525574e-07, 0.49353033, -1.7136335e-07)
 shape = SubResource("CapsuleShape3D_gbnqi")
 disabled = true
 debug_color = Color(0.7019608, 0, 0, 1)
+
+[node name="Knife" type="MeshInstance3D" parent="."]
+unique_name_in_owner = true
+transform = Transform3D(0.9882547, -0.30430257, -0.06036076, 0.07862601, 0.5123192, 1.3570132, -0.13103582, -1.9876001, 0.35902187, 0.6144146, 0.6173438, -0.10717255)
+mesh = SubResource("ArrayMesh_66v6q")
 
 [connection signal="link_reached" from="NavigationAgent3D" to="StateMachine/Moving" method="_on_navigation_agent_3d_link_reached"]
 [connection signal="animation_finished" from="AnimationPlayer" to="StateMachine/Attack" method="_on_animation_player_animation_finished"]
